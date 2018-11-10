@@ -20,7 +20,7 @@ public class Worker {
 
     @OneToOne
     @JoinColumn(name = "id_workers_request")
-    private WorkerRequest WORKER_workerRequest;
+    private WorkerRequest workerRequest;
 
     public Date getDate_start() {
         return date_start;
@@ -66,12 +66,12 @@ public class Worker {
         this.id = id;
     }
 
-    public WorkerRequest getWORKER_workerRequest() {
-        return WORKER_workerRequest;
+    public WorkerRequest getWorkerRequest() {
+        return workerRequest;
     }
 
-    public void setWORKER_workerRequest(WorkerRequest WORKER_workerRequest) {
-        this.WORKER_workerRequest = WORKER_workerRequest;
+    public void setWorkerRequest(WorkerRequest workerRequest) {
+        this.workerRequest = workerRequest;
     }
 
     public long getId() {

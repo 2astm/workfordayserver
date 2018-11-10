@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "Workers_request")
 public class WorkerRequest {
 
+
     @Id
     @GeneratedValue
     private long id;
@@ -16,14 +17,18 @@ public class WorkerRequest {
 
     @ManyToOne
     @JoinColumn(name = "id_vacancy")
-    private Vacancy WORKER_REQUEST_vacancy;
+    private Vacancy vacancy;
 
     private double price;
     public enum State_request {Statement, Approved, Rejected};
     private State_request stateRequest;
 
-    @OneToOne(mappedBy = "HOLDPAYMENT_workerRequest")
+    @OneToOne(mappedBy = "workerRequest")
     private HoldPayment holdPayment;
+
+
+    @OneToOne(mappedBy = "workerRequest")
+    private Worker worker;
 
     public void setId(long id) {
         this.id = id;
@@ -37,8 +42,6 @@ public class WorkerRequest {
         this.holdPayment = holdPayment;
     }
 
-    @OneToOne(mappedBy = "WORKER_workerRequest")
-    private Worker worker;
 
     public User getUser() {
         return user;
@@ -48,12 +51,12 @@ public class WorkerRequest {
         this.user = user;
     }
 
-    public Vacancy getWORKER_REQUEST_vacancy() {
-        return WORKER_REQUEST_vacancy;
+    public Vacancy getVacancy() {
+        return vacancy;
     }
 
-    public void setWORKER_REQUEST_vacancy(Vacancy WORKER_REQUEST_vacancy) {
-        this.WORKER_REQUEST_vacancy = WORKER_REQUEST_vacancy;
+    public void setVacancy(Vacancy vacancy) {
+        this.vacancy = vacancy;
     }
 
     public double getPrice() {

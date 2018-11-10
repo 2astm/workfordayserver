@@ -1,22 +1,23 @@
 package com.no.company.workfordayserver.entities;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 
+@Entity
 public class HoldPayment {
     @Id
     @GeneratedValue
     private long id;
+
     @OneToOne
     @JoinColumn(name = "id_worker_request")
-    private WorkerRequest HOLDPAYMENT_workerRequest;
+    private WorkerRequest workerRequest;
 
-    public WorkerRequest getHOLDPAYMENT_workerRequest() {
-        return HOLDPAYMENT_workerRequest;
+    public WorkerRequest getWorkerRequest() {
+        return workerRequest;
     }
 
-    public void setHOLDPAYMENT_workerRequest(WorkerRequest HOLDPAYMENT_workerRequest) {
-        this.HOLDPAYMENT_workerRequest = HOLDPAYMENT_workerRequest;
+    public void setWorkerRequest(WorkerRequest workerRequest) {
+        this.workerRequest = workerRequest;
     }
 
     public long getId() {

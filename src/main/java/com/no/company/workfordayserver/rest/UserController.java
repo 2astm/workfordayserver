@@ -24,7 +24,7 @@ public class UserController {
 //        Dispute dispute = new Dispute();
 //        dispute.setState(Dispute.State.Proccecing);
 //        dispute.setUser(new User());
-//        dispute.setWORKER_REQUEST_vacancy(new Vacancy());
+//        dispute.setVacancy(new Vacancy());
 //        service.addDispute(dispute);
         System.out.println(service.getAll().get(0).getState());
         return service.getAll();

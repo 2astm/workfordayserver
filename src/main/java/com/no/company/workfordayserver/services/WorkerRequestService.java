@@ -4,7 +4,7 @@ import com.no.company.workfordayserver.entities.WorkerRequest;
 import com.no.company.workfordayserver.repos.WorkerRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class WorkerRequesService {
+public class WorkerRequestService {
 
     @Autowired
     private WorkerRequestRepository repository;

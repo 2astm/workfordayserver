@@ -7,6 +7,7 @@ import java.util.Set;
 @Table(name = "vacancy")
 public class Vacancy {
 
+
     @Id
     @GeneratedValue
     private long id;
@@ -14,7 +15,7 @@ public class Vacancy {
     @OneToMany(mappedBy = "vacancy")
     private Set<Dispute> disputes;
 
-    @OneToMany(mappedBy = "WORKER_REQUEST_vacancy")
+    @OneToMany(mappedBy = "vacancy")
     private Set<WorkerRequest> workerRequests;
 
     public Set<WorkerRequest> getWorkerRequests() {
