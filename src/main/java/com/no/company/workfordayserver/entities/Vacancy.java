@@ -14,6 +14,18 @@ public class Vacancy {
     @OneToMany(mappedBy = "vacancy")
     private Set<Dispute> disputes;
 
+    @OneToMany(mappedBy = "WORKER_REQUEST_vacancy")
+    private Set<WorkerRequest> workerRequests;
+
+    public Set<WorkerRequest> getWorkerRequests() {
+        return workerRequests;
+    }
+
+    public void setWorkerRequests(Set<WorkerRequest> workerRequests) {
+        this.workerRequests = workerRequests;
+    }
+
+
     public long getId() {
         return id;
     }
