@@ -7,12 +7,25 @@ import java.util.Set;
 @Table(name = "vacancy")
 public class Vacancy {
 
+
     @Id
     @GeneratedValue
     private long id;
 
     @OneToMany(mappedBy = "vacancy")
     private Set<Dispute> disputes;
+
+    @OneToMany(mappedBy = "vacancy")
+    private Set<WorkerRequest> workerRequests;
+
+    public Set<WorkerRequest> getWorkerRequests() {
+        return workerRequests;
+    }
+
+    public void setWorkerRequests(Set<WorkerRequest> workerRequests) {
+        this.workerRequests = workerRequests;
+    }
+
 
     public long getId() {
         return id;

@@ -12,7 +12,7 @@ public class Card {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user_fk2")
+    @JoinColumn(name = "id_user")
     private User card_user;
     //TODO Связь с cards
     /*
