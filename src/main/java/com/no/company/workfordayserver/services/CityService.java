@@ -13,15 +13,15 @@ public class CityService {
     @Autowired
     private CityRepository repository;
 
-    public List<City> getAllUsers() {
+    public List<City> getAllCities() {
         return repository.findAll();
     }
 
-    public Optional<City> getUserById(long id) {
+    public Optional<City> getCityById(long id) {
         return repository.findById(id);
     }
 
-    public void addUser(City s) {
+    public void addCity(City s) {
         repository.saveAndFlush(s);
     }
 }

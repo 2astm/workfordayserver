@@ -43,30 +43,26 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<WorkerRequest> workerRequests;
 
-    public City getCity() {
-        return city;
+    @OneToMany(mappedBy = "userFromMessage")
+    private Set<Message> messagesFrom;
+
+    @OneToMany(mappedBy = "userToMessage")
+    private Set<Message> messagesTo;
+
+    public long getId() {
+        return id;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public Set<WorkerRequest> getWorkerRequests() {
-        return workerRequests;
+    public String getName() {
+        return name;
     }
 
-    public void setWorkerRequests(Set<WorkerRequest> workerRequests) {
-        this.workerRequests = workerRequests;
-    }
-
-    public User(){}
-
-    public City getId_city() {
-        return this.city;
-    }
-
-    public void setId_city(City city) {
-        this.city = city;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSurname() {
@@ -75,11 +71,6 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-
-    public User(String name) {
-        this.name = name;
     }
 
     public String getPhoneNumber() {
@@ -114,6 +105,14 @@ public class User {
         this.login = login;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     public Date getDateRegister() {
         return dateRegister;
     }
@@ -130,20 +129,28 @@ public class User {
         this.dateUpdate = dateUpdate;
     }
 
-    public long getId() {
-        return id;
+    public Set<WorkerRequest> getWorkerRequests() {
+        return workerRequests;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setWorkerRequests(Set<WorkerRequest> workerRequests) {
+        this.workerRequests = workerRequests;
     }
 
-    public String getName() {
-        return name;
+    public Set<Message> getMessagesFrom() {
+        return messagesFrom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMessagesFrom(Set<Message> messagesFrom) {
+        this.messagesFrom = messagesFrom;
+    }
+
+    public Set<Message> getMessagesTo() {
+        return messagesTo;
+    }
+
+    public void setMessagesTo(Set<Message> messagesTo) {
+        this.messagesTo = messagesTo;
     }
 }
 
