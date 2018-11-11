@@ -13,20 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private DisputeService service;
-
-    @RequestMapping(value = "/saveDispute/", method = RequestMethod.GET)
-    public List saveDispute(){
-//        System.out.println("Called");
-//        Dispute dispute = new Dispute();
-//        dispute.setState(Dispute.State.Proccecing);
-//        dispute.setUser(new User());
-//        dispute.setVacancy(new Vacancy());
-//        service.addDispute(dispute);
-        System.out.println(service.getAll().get(0).getState());
-        return service.getAll();
+    //FULL PATH: localhost:8080/user/test
+    @RequestMapping(value = "/test")
+    public String test(){
+        return "Hello world";
     }
 }

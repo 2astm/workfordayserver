@@ -24,37 +24,28 @@ public class Vacancy {
     @Column(name = "price")
     private double price;
 
-    /**
-     * Error: Нужна таблица City
-     * добавить к проекту
-     */
-   /* @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_city")
-    private City city;*/
+    private City city;
 
     @Column(name = "name")
-   private String name;
+    private String name;
 
-   /* Здесь может быть ваш код к State Vacancy
-      Номер карты 674332857639284 закидывайте деньги
-      и приступайте к работе!
-    */
 
     @Column(name = "dateStart")
-   private Date dateStart;
+    private Date dateStart;
 
     @Column(name = "dateEnd")
-   private Date dateEnd;
+    private Date dateEnd;
 
     @Column(name = "dateCreate")
-   private Date dateCreate;
+    private Date dateCreate;
 
     @Column(name = "dateUpdate")
-   private Date dateUpdate;
+    private Date dateUpdate;
 
-    //Надо делать
-    public enum State{
-
+    public enum State {
+        NEW, IN_PROCCESS, CHECKING, READY, DELETED, REJECTED
     }
 
     private State state;
@@ -89,6 +80,14 @@ public class Vacancy {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public String getName() {
@@ -130,8 +129,13 @@ public class Vacancy {
     public void setDateUpdate(Date dateUpdate) {
         this.dateUpdate = dateUpdate;
     }
-    //Своровано
-    /*@OneToMany(mappedBy = "vacancy")
-    private Set<Dispute> disputes;*/
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
 }
 

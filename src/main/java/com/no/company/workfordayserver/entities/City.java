@@ -15,7 +15,6 @@ public class City {
     @JoinColumn(name = "id_region", nullable = false)
     private Region region;
 
-
     @Column(name = "name")
     private String name;
 
