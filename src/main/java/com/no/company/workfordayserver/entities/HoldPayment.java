@@ -1,6 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class HoldPayment {
@@ -9,8 +10,18 @@ public class HoldPayment {
     private long id;
 
     @OneToOne
-    @JoinColumn(name = "id_worker_request")
+    @JoinColumn(name = "id_worker_request") //<---Reget??????
     private WorkerRequest workerRequest;
+
+    @Column(name = "date")
+    private Date date;
+
+    //Надо делать
+    public enum State{
+        CONFIRMED, WAITING, FREEZE
+    }
+
+    private State state;
 
     public WorkerRequest getWorkerRequest() {
         return workerRequest;

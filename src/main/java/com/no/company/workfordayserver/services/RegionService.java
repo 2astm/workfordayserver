@@ -13,15 +13,15 @@ public class RegionService {
     @Autowired
     private RegionRepository repository;
 
-    public List<Region> getAllUsers() {
+    public List<Region> getAllRegions() {
         return repository.findAll();
     }
 
-    public Optional<Region> getUserById(long id) {
+    public Optional<Region> getRegionById(long id) {
         return repository.findById(id);
     }
 
-    public void addUser(Region s) {
+    public void addRegion(Region s) {
         repository.saveAndFlush(s);
     }
 }

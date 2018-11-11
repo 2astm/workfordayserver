@@ -12,11 +12,6 @@ public class PaymentService{
     @Autowired
     private PaymentRepository repository;
 
-
-    public void setRepository(PaymentRepository repository) {
-        this.repository = repository;
-    }
-
     public void addPayment(Payment payment){
         repository.save(payment);
     }
