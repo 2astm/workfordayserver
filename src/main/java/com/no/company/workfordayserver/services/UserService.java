@@ -21,7 +21,36 @@ public class UserService {
         return repository.findById(id);
     }
 
+    public User getUserByLogin(String login) {
+        return  repository.findByLogin(login);
+    }
+
     public void addUser(User s) {
         repository.saveAndFlush(s);
+    }
+
+    public void updateUser(long id, User newUser) {
+        if(newUser.getPassword() != null) {
+            repository.setPassword(id, newUser.getPassword());
+        }
+        if(newUser.getLogin() != null) {
+            repository.setLogin(id, newUser.getLogin());
+        }
+        if(newUser.getName() != null) {
+            repository.setName(id, newUser.getName());
+        }
+        if(newUser.getSurname() != null) {
+            repository.setSurname(id, newUser.getSurname());
+        }
+        if(newUser.getEmail() != null) {
+            repository.setEmail(id, newUser.getEmail());
+        }
+        if(newUser.getPhoneNumber() != null) {
+            repository.setPhoneNumber(id, newUser.getPhoneNumber());
+        }
+    }
+
+    public void remove(User user) {
+        repository.delete(user);
     }
 }
