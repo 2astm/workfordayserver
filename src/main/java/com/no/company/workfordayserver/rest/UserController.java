@@ -1,14 +1,11 @@
 package com.no.company.workfordayserver.rest;
 
-
-import com.no.company.workfordayserver.entities.Dispute;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.Vacancy;
 import com.no.company.workfordayserver.services.DisputeService;
 import com.no.company.workfordayserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.xml.crypto.Data;
 import java.lang.ref.ReferenceQueue;
 import java.util.Date;
@@ -19,9 +16,13 @@ import java.util.List;
 public class UserController {
 
     //FULL PATH: localhost:8080/user/test
-    @RequestMapping(value = "/test")
-    public String test(){
-        return "Hello world";
+
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+
     }
 
     @Autowired

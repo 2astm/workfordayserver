@@ -1,5 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,6 +13,7 @@ public class HoldPayment {
 
     @OneToOne
     @JoinColumn(name = "id_worker_request") //<---Reget??????
+    @JsonBackReference(value = "workerRequest-holdPayment")
     private WorkerRequest workerRequest;
 
     @Column(name = "date")

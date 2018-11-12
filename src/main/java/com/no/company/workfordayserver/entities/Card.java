@@ -1,5 +1,8 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,14 +16,16 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private User card_user;
-    //TODO Связь с cards
-    /*
-    @OneToMany(mappedBy = "cards")
+    @JsonBackReference(value = "user-card")
+    private User user;
+
+    @OneToMany(mappedBy = "cardTo")
+    @JsonManagedReference(value = "cardTo-payment")
     private Set<Payment> paymentsTo;
 
-    @OneToMany(mappedBy = "cards")
-    private Set<Payment> paymentsFrom;*/
+    @OneToMany(mappedBy = "cardFrom")
+    @JsonManagedReference(value = "cardFrom-payment")
+    private Set<Payment> paymentsFrom;
 
     private String number;
 
@@ -39,11 +44,11 @@ public class Card {
     }
 
     public User getUser() {
-        return card_user;
+        return user;
     }
 
     public void setUser(User user) {
-        this.card_user = user;
+        this.user = user;
     }
 
     public String getNumber() {

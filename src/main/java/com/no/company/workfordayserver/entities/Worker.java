@@ -1,5 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class Worker {
 
     @OneToOne
     @JoinColumn(name = "id_workers_request")
+    @JsonBackReference(value = "workerRequest-Worker")
     private WorkerRequest workerRequest;
 
     public Date getDate_start() {

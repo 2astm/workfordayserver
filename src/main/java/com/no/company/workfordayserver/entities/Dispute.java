@@ -1,5 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,10 +18,12 @@ public class Dispute {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @JsonBackReference(value = "user-dispute")
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_vacancy")
+    @JsonBackReference(value = "dispute-vacancy")
     private Vacancy vacancy;
 
     public enum State{

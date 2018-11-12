@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
     User findByLogin(String login);
 
     @Modifying

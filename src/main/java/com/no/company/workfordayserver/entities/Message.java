@@ -1,5 +1,6 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.no.company.workfordayserver.entities.User;
 
 import javax.persistence.*;
@@ -15,11 +16,13 @@ public class Message {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_front")
+    @JoinColumn(name = "id_from")
+    @JsonBackReference(value = "userFromMessage-message")
     private User userFromMessage;
 
     @ManyToOne
     @JoinColumn(name = "id_to")
+    @JsonBackReference(value = "userToMessage-message")
     private User userToMessage;
 
     @Column(name = "messages")
@@ -27,13 +30,6 @@ public class Message {
 
     @Column(name = "date")
     private Date date;
-
-    //Надо делать
-    public enum State{
-
-    }
-
-    private State state;
 
     public long getId() {
         return id;
@@ -74,7 +70,6 @@ public class Message {
     public void setDate(Date date) {
         this.date = date;
     }
-
     public State getState() {
         return state;
     }

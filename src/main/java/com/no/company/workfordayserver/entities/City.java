@@ -1,4 +1,6 @@
 package com.no.company.workfordayserver.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class City {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_region", nullable = false)
+    @JsonBackReference(value = "region-city")
     private Region region;
 
     @Column(name = "name")

@@ -1,4 +1,6 @@
 package com.no.company.workfordayserver.entities;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class Region {
     private String name;
 
     @OneToMany(mappedBy = "region")
+    @JsonManagedReference(value = "region-city")
     private Set<City> cities;
 
     public Region(){}

@@ -1,5 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,10 +19,12 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "id_from")
+    @JsonBackReference(value = "cardFrom-payment")
     private Card cardFrom;
 
     @ManyToOne
     @JoinColumn(name = "id_to")
+    @JsonBackReference(value = "cardTo-payment")
     private Card cardTo;
 
     public long getId() {
