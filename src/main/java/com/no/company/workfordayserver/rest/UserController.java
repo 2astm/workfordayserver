@@ -19,13 +19,6 @@ public class UserController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+
     }
-/*
-    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void test(@RequestBody User user, @RequestHeader(name = "login") String login, @RequestHeader(name = "password") String password){
-        User oldUser = userService.getUserByLogin(login);
-        if (oldUser != null && oldUser.getPassword().equals(password)){
-            userService.updateUser(oldUser.getId(), user);
-        }
-    }*/
 }

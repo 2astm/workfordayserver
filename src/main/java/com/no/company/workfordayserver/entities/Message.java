@@ -31,7 +31,6 @@ public class Message {
     @Column(name = "date")
     private Date date;
 
-
     public long getId() {
         return id;
     }
@@ -71,5 +70,11 @@ public class Message {
     public void setDate(Date date) {
         this.date = date;
     }
+    public State getState() {
+        return state;
+    }
 
+    public void setState(State state) {
+        this.state = state;
+    }
 }

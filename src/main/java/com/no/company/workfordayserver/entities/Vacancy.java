@@ -2,6 +2,7 @@ package com.no.company.workfordayserver.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.no.company.workfordayserver.entities.User;
 
 import javax.persistence.*;
@@ -35,6 +36,17 @@ public class Vacancy {
     @OneToMany(mappedBy = "vacancy")
     @JsonManagedReference(value = "dispute-vacancy")
     private Set<Dispute> disputes;
+
+    @ManyToOne
+    @JoinColumn(name = "id_creator")
+    private User user;
+
+    @Column(name = "price")
+    private double price;
+
+    @ManyToOne
+    @JoinColumn(name = "id_city")
+    private City city;
 
     @Column(name = "name")
     private String name;
@@ -97,6 +109,7 @@ public class Vacancy {
     public void setCity(City city) {
         this.city = city;
     }
+
 
     public String getName() {
         return name;
