@@ -1,5 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.no.company.workfordayserver.entities.User;
 
 import javax.persistence.*;
@@ -19,6 +21,7 @@ public class Vacancy {
 
     @ManyToOne
     @JoinColumn(name = "id_creator")
+    @JsonBackReference(value = "vacancy-workerRequest")
     private User user;
 
     @Column(name = "price")
@@ -26,7 +29,12 @@ public class Vacancy {
 
     @ManyToOne
     @JoinColumn(name = "id_city")
+    @JsonBackReference(value = "city-vacancy")
     private City city;
+
+    @OneToMany(mappedBy = "vacancy")
+    @JsonManagedReference(value = "dispute-vacancy")
+    private Set<Dispute> disputes;
 
     @Column(name = "name")
     private String name;

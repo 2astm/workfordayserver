@@ -1,4 +1,7 @@
 package com.no.company.workfordayserver.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -32,6 +35,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "id_city")
+    @JsonBackReference
     private City city;
 
     @Column(name = "dateRegister")
@@ -41,13 +45,40 @@ public class User {
     private Date dateUpdate;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private Set<WorkerRequest> workerRequests;
 
     @OneToMany(mappedBy = "userFromMessage")
+    @JsonManagedReference(value = "userFromMessage-message")
     private Set<Message> messagesFrom;
 
     @OneToMany(mappedBy = "userToMessage")
+    @JsonManagedReference(value = "userToMessage-message")
     private Set<Message> messagesTo;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "user-card")
+    private Set<Card> cards;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "user-dispute")
+    private Set<Dispute> disputes;
+
+    public Set<Dispute> getDisputes() {
+        return disputes;
+    }
+
+    public void setDisputes(Set<Dispute> disputes) {
+        this.disputes = disputes;
+    }
+
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
+    }
 
     public long getId() {
         return id;

@@ -24,4 +24,14 @@ public class UserService {
     public void addUser(User s) {
         repository.saveAndFlush(s);
     }
+
+    public User getUserByLogin(String login){
+        return repository.findByLogin(login);
+    }
+
+    public void updateUser(long id, User newUser){
+
+        if (newUser.getPassword()!= null)
+            repository.setPassword(id, newUser.getPassword());
+    }
 }

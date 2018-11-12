@@ -1,5 +1,8 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,21 +16,27 @@ public class WorkerRequest {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @JsonBackReference
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_vacancy")
+    @JsonBackReference(value = "vacancy-workerRequest")
     private Vacancy vacancy;
 
     private double price;
-    public enum State_request {Statement, Approved, Rejected};
+    public enum State_request {
+        Waiting, Approved, Rejected, Closed
+    };
     private State_request stateRequest;
 
     @OneToOne(mappedBy = "workerRequest")
+    @JsonManagedReference(value = "workerRequest-holdPayment")
     private HoldPayment holdPayment;
 
 
     @OneToOne(mappedBy = "workerRequest")
+    @JsonManagedReference(value = "workerRequest-Worker")
     private Worker worker;
 
     public void setId(long id) {
