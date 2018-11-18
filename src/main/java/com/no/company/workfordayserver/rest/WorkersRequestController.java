@@ -27,6 +27,7 @@ public class WorkersRequestController {
         this.service = service;
     }
 
+    //TODO How to check user login and password
     @RequestMapping(method = RequestMethod.POST, value = "/addRequest")
     public void addRequest(@RequestBody WorkerRequest workerRequest){
         service.addWorkerRequest(workerRequest);

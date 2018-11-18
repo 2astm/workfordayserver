@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,16 +22,19 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "phoneNumber")
+
+
+    @Column(name = "phoneNumber", unique = true)
     private String phoneNumber;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "login")
+    @Column(name = "login", unique = true)
+    @NotNull
     private String login;
 
     @ManyToOne

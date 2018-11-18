@@ -37,20 +37,8 @@ public class Vacancy {
     @JsonManagedReference(value = "dispute-vacancy")
     private Set<Dispute> disputes;
 
-    @ManyToOne
-    @JoinColumn(name = "id_creator")
-    private User user;
-
-    @Column(name = "price")
-    private double price;
-
-    @ManyToOne
-    @JoinColumn(name = "id_city")
-    private City city;
-
     @Column(name = "name")
     private String name;
-
 
     @Column(name = "dateStart")
     private Date dateStart;
@@ -69,6 +57,26 @@ public class Vacancy {
     }
 
     private State state;
+
+    private double lat;
+
+    private double lng;
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
 
     public long getId() {
         return id;
@@ -110,6 +118,13 @@ public class Vacancy {
         this.city = city;
     }
 
+    public Set<Dispute> getDisputes() {
+        return disputes;
+    }
+
+    public void setDisputes(Set<Dispute> disputes) {
+        this.disputes = disputes;
+    }
 
     public String getName() {
         return name;

@@ -15,31 +15,31 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional
-    @Query ("Update User set user.password = ?2 where id ?= 1")
+    @Query (value = "Update User set password = ?2 where id = ?1")
     public void setPassword(@Param(value = "user_id") long id, @Param(value = "new_password") String password);
 
     @Modifying
     @Transactional
-    @Query ("Update User set user.login = ?2 where id ?= 1")
+    @Query (value = "Update User set login = ?2 where id = ?1")
     public void setLogin(@Param(value = "user_id") long id, @Param(value = "new_login") String login);
 
     @Modifying
     @Transactional
-    @Query ("Update User set user.name = ?2 where id ?= 1")
+    @Query (value = "Update User set name = ?2 where id = ?1")
     public void setName(@Param(value = "user_id") long id, @Param(value = "new_name") String name);
 
     @Modifying
     @Transactional
-    @Query ("Update User set user.Surname = ?2 where id ?= 1")
+    @Query (value = "Update User set surname = ?2 where id = ?1")
     public void setSurname(@Param(value = "user_id") long id, @Param(value = "Surname") String Surname);
 
     @Modifying
     @Transactional
-    @Query ("Update User set user.email = ?2 where id ?= 1")
+    @Query (value = "Update User set email = ?2 where id = ?1")
     public void setEmail(@Param(value = "user_id") long id, @Param(value = "email") String email);
 
     @Modifying
     @Transactional
-    @Query ("Update User set user.phoneNumber = ?2 where id ?= 1")
+    @Query (value = "Update User set phoneNumber = ?2 where id = ?1")
     public void setPhoneNumber(@Param(value = "user_id") long id, @Param(value = "phoneNumber") String phoneNumber);
 }
