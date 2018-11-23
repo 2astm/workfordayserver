@@ -21,6 +21,10 @@ public class RegionService {
         return repository.findById(id);
     }
 
+    public Region getRegionByName(String name) {
+        return repository.findByName(name);
+    }
+
     public void addRegion(Region s) {
         repository.saveAndFlush(s);
     }
