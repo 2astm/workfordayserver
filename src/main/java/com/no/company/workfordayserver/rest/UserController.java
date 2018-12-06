@@ -37,7 +37,7 @@ public class UserController {
     public void changeUser(@RequestBody User user, @RequestHeader(name = "login") String login,
                            @RequestHeader(name = "password") String password) {
 
-            service.updateUser(user.getId(), user);
+        service.updateUser(user.getId(), user);
     }
     /*
     TODO think about it
