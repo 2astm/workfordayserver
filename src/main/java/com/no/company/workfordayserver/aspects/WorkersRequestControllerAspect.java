@@ -1,4 +1,4 @@
-package com.no.company.workfordayserver.asspects;
+package com.no.company.workfordayserver.aspects;
 
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.Vacancy;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WorkersRequestControllerAspect {
 
-    public final static Logger logger = LoggerFactory.getLogger("controller_aspect");
+    public final static Logger logger = LoggerFactory.getLogger("worker_request_controller_aspect");
 
     @Before("point_cut() && args(workerRequest)")
     public void addRequest(JoinPoint joinPoint, WorkerRequest workerRequest){
