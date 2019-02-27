@@ -17,6 +17,8 @@ public class Vacancy {
     @GeneratedValue
     private long id;
 
+
+    // TODO discription?
     @Column(name = "disruption")
     private String disruption;
 
