@@ -20,7 +20,7 @@ public class CityController {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getByName")
+    @RequestMapping(method = RequestMethod.GET, value = "/getByName/")
     public City getCityObject(@RequestParam(name = "name")String name){
         return service.getCityByName(name);
     }

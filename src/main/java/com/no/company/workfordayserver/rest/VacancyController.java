@@ -24,35 +24,33 @@ public class VacancyController {
     }
 
     //PATH: /vacancy/getall/
-    @RequestMapping(value = "/getall")
+    @RequestMapping(value = "/getall/", method = RequestMethod.GET)
     @ResponseBody
-    public List<Vacancy> getAllVacancies(){
-        return service.getAllVacancies();
+    public List<Vacancy> getAllVacancies(@RequestParam int page, @RequestParam int results){
+        return service.getAllVacancies(page, results);
     }
 
     //PATH: /vacancy/get/
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    @RequestMapping(value = "/get/", method = RequestMethod.POST)
     @ResponseBody
     public List<Vacancy> getVacancy(@RequestBody Vacancy vacancy){
         return service.getVacancy(vacancy);
     }
 
     //PATH: /vacancy/add/
-    @RequestMapping(value = "/add")
-    public void addVacancy(Vacancy vacancy){
+    @RequestMapping(value = "/add/", method = RequestMethod.POST)
+    public void addVacancy(@RequestBody Vacancy vacancy){
         service.addVacancy(vacancy);
     }
 
     //PATH: /vacancy/set/
-    @RequestMapping(value = "/set", method = RequestMethod.POST)
+    @RequestMapping(value = "/set/", method = RequestMethod.POST)
     public void setVacancyName(@RequestBody Vacancy vacancy){
        service.update(vacancy);
     }
 
-
-
     //PATH: /vacancy/delete/
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/", method = RequestMethod.POST)
     public void deleteVacancy(@RequestBody Vacancy vacancy){
         service.removeVacancy(vacancy);
     }
