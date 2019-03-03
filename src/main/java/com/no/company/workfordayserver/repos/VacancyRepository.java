@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.awt.print.Pageable;
 import java.util.Date;
+import java.util.List;
 
-public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
+public interface VacancyRepository extends JpaRepository<Vacancy, Long>{
 
     @Modifying
     @Transactional

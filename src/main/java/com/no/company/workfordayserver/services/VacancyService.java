@@ -3,6 +3,7 @@ package com.no.company.workfordayserver.services;
 import com.no.company.workfordayserver.entities.Vacancy;
 import com.no.company.workfordayserver.repos.VacancyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class VacancyService {
         this.repository = repository;
     }
 
-    public List<Vacancy> getAllVacancies() {
-        return repository.findAll();
+    public List<Vacancy> getAllVacancies(int page,int results) {
+        return repository.findAll(new PageRequest(page*results, page*results + results)).getContent();
     }
 
     public Optional<Vacancy> getVacancyById(long id) { return repository.findById(id); }
@@ -28,7 +29,9 @@ public class VacancyService {
         repository.saveAndFlush(s);
     }
 
-    public void removeVacancy(Vacancy s){ repository.delete(s); }
+    public void removeVacancy(Vacancy s){
+        System.out.println("jlj");
+        repository.delete(s); }
 
     public void update(Vacancy vacancy) {
         if (vacancy.getCity() == null)

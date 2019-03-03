@@ -16,26 +16,26 @@ public class VacancyControllerAspects {
     public void addVacancy(JoinPoint point, Vacancy vacancy) {
         logger.info("ADDED: Name: " + vacancy.getName() +
                 "Price: " + vacancy.getPrice() +
-                "City" + vacancy.getCity() +
+                "City" + vacancy.getCity().getId() +
                 "Id" + vacancy.getId());
     }
 
-    @Around("vacancyController_pointCut() && args(vacancy)")
+    /*@Around("vacancyController_pointCut() && args(vacancy)")
     public void changeVacancy(JoinPoint point, Vacancy vacancy) {
         logger.info("CHANGED: Name: " + vacancy.getName() +
                 "Price: " + vacancy.getPrice() +
-                "City" + vacancy.getCity() +
+                "City" + vacancy.getCity().getId() +
                 "Id" + vacancy.getId());
     }
 
     // for delete if necessary
-    @AfterReturning("vacancyController_pointCut() && args(vacancy)")
+   /* @AfterReturning("vacancyController_pointCut() && args(vacancy)")
     public void deleteVacancy(JoinPoint point, Vacancy vacancy) {
         logger.info("DELETED: Name: " + vacancy.getName() +
                 "Price: " + vacancy.getPrice() +
                 "City" + vacancy.getCity() +
                 "Id" + vacancy.getId());
-    }
+    }*/
 
     @Pointcut("execution(* com.no.company.workfordayserver.rest.VacancyController.*(..))")
     public void vacancyController_pointCut() {}
