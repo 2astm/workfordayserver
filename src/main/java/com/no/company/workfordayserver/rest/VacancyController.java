@@ -23,27 +23,27 @@ public class VacancyController {
         this.service = service;
     }
 
-    //FULL PATH: localhost:8080/vacancy/get
+    //PATH: /vacancy/getall/
     @RequestMapping(value = "/getall")
     @ResponseBody
     public List<Vacancy> getAllVacancies(){
         return service.getAllVacancies();
     }
 
+    //PATH: /vacancy/get/
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     @ResponseBody
     public List<Vacancy> getVacancy(@RequestBody Vacancy vacancy){
         return service.getVacancy(vacancy);
     }
 
-
-    //FULL PATH: localhost:8080/vacancy/add
+    //PATH: /vacancy/add/
     @RequestMapping(value = "/add")
     public void addVacancy(Vacancy vacancy){
         service.addVacancy(vacancy);
     }
 
-    //FULL PATH: localhost:8080/vacancy/set/name
+    //PATH: /vacancy/set/
     @RequestMapping(value = "/set", method = RequestMethod.POST)
     public void setVacancyName(@RequestBody Vacancy vacancy){
        service.update(vacancy);
@@ -51,7 +51,7 @@ public class VacancyController {
 
 
 
-    //FULL PATH: localhost:8080/vacancy/delete
+    //PATH: /vacancy/delete/
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void deleteVacancy(@RequestBody Vacancy vacancy){
         service.removeVacancy(vacancy);

@@ -39,6 +39,7 @@ public class UserController {
 
         service.updateUser(user.getId(), user);
     }
+
     /*
     TODO think about it
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
@@ -46,4 +47,5 @@ public class UserController {
         service.remove(user);
     }
     */
+
 }

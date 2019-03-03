@@ -27,7 +27,6 @@ public class WorkersRequestController {
         this.service = service;
     }
 
-    //TODO How to check user login and password
     @RequestMapping(method = RequestMethod.POST, value = "/addRequest")
     public void addRequest(@RequestBody WorkerRequest workerRequest){
         service.addWorkerRequest(workerRequest);
@@ -43,19 +42,18 @@ public class WorkersRequestController {
         return service.getRequestsByVacancy(vacancy);
     }
 
+    //NEED AUTORIZATION
     @RequestMapping(method = RequestMethod.GET, value = "/changeStatus")
     public void setStatus(@RequestParam(name = "id") long id, @RequestParam(name = "new_status") WorkerRequest.State_request state,
                           @RequestParam(name = "login")String login, @RequestParam(name = "password") String password){
-        //TODO checkPassword
-
         if (state == WorkerRequest.State_request.Closed){
             service.setStatusByRequestCreator(id, userService.getUserByLogin(login).getId(), state);
             return;
-        }
+        }/*
         if (state != null){
             service.setStatusByVacancyCreator(id, userService.getUserByLogin(login).getId(), state);
             if (state == WorkerRequest.State_request.Approved);
-                //TODO Insert in the hold payments request id
-        }
+
+        }*/
     }
 }
