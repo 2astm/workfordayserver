@@ -26,12 +26,38 @@ public class Dispute {
     @JsonBackReference(value = "dispute-vacancy")
     private Vacancy vacancy;
 
+    @Column(name = "dateCreate")
+    private Date dateCreate;
+
+    @Column(name = "dateUpdate")
+    private Date dateUpdate;
+
     public enum State{
         PROCCECING,
         CLOSED
     }
 
+    @Column(name = "state")
     private State state;
+
+    public Date getDateCreate() {
+        return dateCreate;
+    }
+
+    @PrePersist
+    public void setDateCreate() {
+        this.dateCreate = new Date();
+        this.dateUpdate = dateCreate;
+    }
+
+    public Date getDateUpdate() {
+        return dateUpdate;
+    }
+
+    @PreUpdate
+    public void setDateUpdate() {
+        this.dateUpdate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -73,6 +99,9 @@ public class Dispute {
         this.state = state;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Id: " + id + " Date: " + date.toString() + " User: " + user.toString() + " Vacancy: " + vacancy.toString() + " DateCreate: " + dateCreate.toString()+
+                " DateUpdate: " + dateUpdate.toString() + " State: " + state;
+    }
 }

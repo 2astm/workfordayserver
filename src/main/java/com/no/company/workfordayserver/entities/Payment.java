@@ -27,6 +27,7 @@ public class Payment {
     @JsonBackReference(value = "cardTo-payment")
     private Card cardTo;
 
+
     public long getId() {
         return id;
     }
@@ -39,8 +40,9 @@ public class Payment {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    @PrePersist
+    public void setDate() {
+        this.date = new Date();
     }
 
     public double getPrice() {
@@ -65,5 +67,10 @@ public class Payment {
 
     public void setCardTo(Card cardTo) {
         this.cardTo = cardTo;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " Date: " + date.getDate() + " Price: " + price + " CardFrom: " + cardFrom.toString() + " CardTo: " + cardTo.toString();
     }
 }

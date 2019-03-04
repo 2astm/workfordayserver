@@ -15,8 +15,7 @@ public class Vacancy {
     @GeneratedValue
     private long id;
 
-    // TODO discription?
-    @Column(name = "description")
+    @Column(name = "discription")
     private String discription;
 
     @ManyToOne
@@ -173,6 +172,12 @@ public class Vacancy {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " Lat: " + lat + " Lng: " + lng + " Discription: " + discription + " User: " + user.toString() + " Price: " + price + " City: " + city.toString() + " Name: " + name +
+                " DateStart: " + dateStart + " DateEnd: " + dateEnd + " DateCreate: " + dateCreate + " DateUpdate: " + dateUpdate + " State: " + state;
     }
 }
 

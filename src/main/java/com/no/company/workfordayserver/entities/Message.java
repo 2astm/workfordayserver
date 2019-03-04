@@ -67,7 +67,14 @@ public class Message {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    @PrePersist
+    public void setDate() {
+        this.date = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " UserFromMessage: " + userFromMessage.toString() + " UserToMessage: " + userToMessage.toString() + " message: " + messages +
+                " Date: " + date.toString();
     }
 }

@@ -2,6 +2,7 @@ package com.no.company.workfordayserver.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -42,5 +43,10 @@ public class Region {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " RegionName: " + name;
     }
 }
