@@ -3,8 +3,6 @@ package com.no.company.workfordayserver.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import com.no.company.workfordayserver.entities.User;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -17,10 +15,8 @@ public class Vacancy {
     @GeneratedValue
     private long id;
 
-
-    // TODO discription?
-    @Column(name = "disruption")
-    private String disruption;
+    @Column(name = "description")
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "id_creator")
@@ -88,12 +84,12 @@ public class Vacancy {
         this.id = id;
     }
 
-    public String getDisruption() {
-        return disruption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDisruption(String disruption) {
-        this.disruption = disruption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {
@@ -156,16 +152,18 @@ public class Vacancy {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreate = new Date();this.dateUpdate = new Date(); state= State.CHECKING;
     }
 
     public Date getDateUpdate() {
         return dateUpdate;
     }
 
-    public void setDateUpdate(Date dateUpdate) {
-        this.dateUpdate = dateUpdate;
+    @PreUpdate
+    protected void onUpdate() {
+        this.dateUpdate = new Date();
     }
 
     public State getState() {
@@ -174,6 +172,12 @@ public class Vacancy {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " Lat: " + lat + " Lng: " + lng + " Discription: " + description + " User: " + user.toString() + " Price: " + price + " City: " + city.toString() + " Name: " + name +
+                " DateStart: " + dateStart + " DateEnd: " + dateEnd + " DateCreate: " + dateCreate + " DateUpdate: " + dateUpdate + " State: " + state;
     }
 }
 
