@@ -51,6 +51,9 @@ public class Vacancy {
     @Column(name = "dateUpdate")
     private Date dateUpdate;
 
+    @ManyToMany(mappedBy = "vacancies", fetch = FetchType.EAGER)
+    private Set<Hashtag> hashtags;
+
     public enum State {
         NEW, IN_PROCCESS, CHECKING, READY, DELETED, REJECTED
     }
@@ -173,6 +176,14 @@ public class Vacancy {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public Set<Hashtag> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(Set<Hashtag> hashtags) {
+        this.hashtags = hashtags;
     }
 }
 
