@@ -15,7 +15,7 @@ public class Region {
     private String name;
 
     @OneToMany(mappedBy = "region")
-    @JsonManagedReference(value = "region-city")
+    //@JsonManagedReference(value = "region-city")
     private Set<City> cities;
 
     public Region(){}

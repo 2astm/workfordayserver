@@ -22,8 +22,6 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-
-
     @Column(name = "phoneNumber", unique = true)
     private String phoneNumber;
 
@@ -37,51 +35,26 @@ public class User {
     @NotNull
     private String login;
 
-    @ManyToOne
-    @JoinColumn(name = "id_city")
-    @JsonBackReference
-    private City city;
-
     @Column(name = "dateRegister")
     private Date dateRegister;
 
     @Column(name = "dateUpdate")
     private Date dateUpdate;
 
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private Set<WorkerRequest> workerRequests;
+    @ManyToOne
+    @JoinColumn(name = "id_city")
+    //@JsonBackReference
+    private City city;
 
-    @OneToMany(mappedBy = "userFromMessage")
-    @JsonManagedReference(value = "userFromMessage-message")
-    private Set<Message> messagesFrom;
+    @OneToMany(mappedBy = "creator")
+    private Set<Vacancy> created_vacancies;
 
-    @OneToMany(mappedBy = "userToMessage")
-    @JsonManagedReference(value = "userToMessage-message")
-    private Set<Message> messagesTo;
-
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "user-card")
-    private Set<Card> cards;
-
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "user-dispute")
-    private Set<Dispute> disputes;
-
-    public Set<Dispute> getDisputes() {
-        return disputes;
+    public Set<Vacancy> getCreated_vacancies() {
+        return created_vacancies;
     }
 
-    public void setDisputes(Set<Dispute> disputes) {
-        this.disputes = disputes;
-    }
-
-    public Set<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(Set<Card> cards) {
-        this.cards = cards;
+    public void setCreated_vacancies(Set<Vacancy> created_vacancies) {
+        this.created_vacancies = created_vacancies;
     }
 
     public long getId() {
@@ -164,28 +137,5 @@ public class User {
         this.dateUpdate = dateUpdate;
     }
 
-    public Set<WorkerRequest> getWorkerRequests() {
-        return workerRequests;
-    }
-
-    public void setWorkerRequests(Set<WorkerRequest> workerRequests) {
-        this.workerRequests = workerRequests;
-    }
-
-    public Set<Message> getMessagesFrom() {
-        return messagesFrom;
-    }
-
-    public void setMessagesFrom(Set<Message> messagesFrom) {
-        this.messagesFrom = messagesFrom;
-    }
-
-    public Set<Message> getMessagesTo() {
-        return messagesTo;
-    }
-
-    public void setMessagesTo(Set<Message> messagesTo) {
-        this.messagesTo = messagesTo;
-    }
 }
 
