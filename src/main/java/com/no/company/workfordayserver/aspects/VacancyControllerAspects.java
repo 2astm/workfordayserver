@@ -14,10 +14,7 @@ public class VacancyControllerAspects {
 
     @Before("vacancyController_pointCut() && args(vacancy)")
     public void addVacancy(JoinPoint point, Vacancy vacancy) {
-        logger.info("ADDED: Name: " + vacancy.getName() +
-                "Price: " + vacancy.getPrice() +
-                "City" + vacancy.getCity().getId() +
-                "Id" + vacancy.getId());
+        logger.info("ADDED: Name: " + vacancy.toString());
     }
 
     /*@Around("vacancyController_pointCut() && args(vacancy)")
