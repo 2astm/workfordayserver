@@ -24,6 +24,6 @@ public interface WorkerRequestRepository extends JpaRepository<WorkerRequest, Lo
 
     @Modifying
     @Transactional
-    @Query(value = "update WorkerRequest set stateRequest = ?3 where id = ?1 and vacancy in (select id from Vacancy where user.id = ?2)")
+    @Query(value = "update WorkerRequest set stateRequest = ?3 where id = ?1 and vacancy in (select id from Vacancy where creator.id = ?2)")
     void setStateByVacancyCreator(long id, long creatorVacancyId, WorkerRequest.State_request state);
 }

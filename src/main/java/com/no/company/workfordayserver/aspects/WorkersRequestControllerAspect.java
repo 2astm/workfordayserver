@@ -19,25 +19,24 @@ public class WorkersRequestControllerAspect {
 
     @Before("point_cut() && args(workerRequest)")
     public void addRequest(JoinPoint joinPoint, WorkerRequest workerRequest){
-        logger.info("Price: "  + workerRequest.getPrice() +
-                "\nState: " + workerRequest.getStateRequest() +
-                "\nId: " + workerRequest.getId());
+        logger.info("Before: " + workerRequest.toString());
     }
 
     @Before("point_cut() && args(user)")
     public void getRequestsByUser(JoinPoint joinPoint, User user){
-        logger.info("User: " + user.getLogin());
+
+        logger.info("Before: " + user.toString());
     }
 
     @Before("point_cut() && args(vacancy)")
     public void getRequestsByVacancy(JoinPoint joinPoint, Vacancy vacancy){
-        logger.info("Vacancy: " + vacancy.getName());
+        logger.info("Before: " + vacancy.toString());
     }
 
     @Before(value = "point_cut() && args(id, state, login, password)")
     public void getRequestsByVacancy(JoinPoint joinPoint, long id, WorkerRequest.State_request state,
                                   String login,String password){
-        logger.info("id: " + id +
+        logger.info("Before: \nid: " + id +
                 "\nState: " + state +
                 "\nLogin: " + login +
                 "\nPassword: " + password);

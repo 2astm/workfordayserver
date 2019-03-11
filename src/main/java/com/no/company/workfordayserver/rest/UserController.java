@@ -27,8 +27,6 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addUser(@RequestBody User user) {
         if (user.getLogin() != null && (user.getPassword() != null)) {
-            user.setDateRegister(new Date());
-            user.setDateUpdate(user.getDateRegister());
             service.addUser(user);
         }
     }

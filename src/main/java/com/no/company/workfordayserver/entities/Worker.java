@@ -1,6 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,9 +21,15 @@ public class Worker {
     private double price;
     private String review;
 
+    @Column(name = "dateCreate")
+    private Date dateCreate;
+
+    @Column(name = "dateUpdate")
+    private Date dateUpdate;
+
     @OneToOne
     @JoinColumn(name = "id_workers_request")
-    @JsonBackReference(value = "workerRequest-Worker")
+    @JsonManagedReference
     private WorkerRequest workerRequest;
 
     public Date getDate_start() {
@@ -79,5 +86,30 @@ public class Worker {
 
     public long getId() {
         return id;
+    }
+
+    public Date getDateCreate() {
+        return dateCreate;
+    }
+
+    @PrePersist
+    public void setDateCreate() {
+        this.dateCreate = new Date();
+        this.dateUpdate = dateCreate;
+    }
+
+    public Date getDateUpdate() {
+        return dateUpdate;
+    }
+
+    @PreUpdate
+    public void setDateUpdate() {
+        this.dateUpdate = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " Mark: " + mark + " Price: " + price + " Review " + review + " DateStart: " + date_start.toString() + " DateEnd: " + date_end.toString() +
+                " WorkerRequest: " + workerRequest.toString() + " DateCreate: " + dateCreate.toString() + " DateUpdate: " + dateUpdate.toString();
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Workers_request")
@@ -14,16 +15,6 @@ public class WorkerRequest {
     @GeneratedValue
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    @JsonBackReference
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "id_vacancy")
-    @JsonBackReference(value = "vacancy-workerRequest")
-    private Vacancy vacancy;
-
     private double price;
     public enum State_request {
         Waiting, Approved, Rejected, Closed
@@ -31,26 +22,30 @@ public class WorkerRequest {
     private State_request stateRequest;
 
     @OneToOne(mappedBy = "workerRequest")
-    @JsonManagedReference(value = "workerRequest-holdPayment")
-    private HoldPayment holdPayment;
-
-
-    @OneToOne(mappedBy = "workerRequest")
-    @JsonManagedReference(value = "workerRequest-Worker")
+    @JsonBackReference
     private Worker worker;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    @JsonManagedReference
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_vacancy")
+    @JsonManagedReference
+    private Vacancy vacancy;
+
+
+    @Column(name = "dateCreate")
+    private Date dateCreate;
+
+    @Column(name = "dateUpdate")
+    private Date dateUpdate;
 
     public void setId(long id) {
         this.id = id;
     }
-
-    public HoldPayment getHoldPayment() {
-        return holdPayment;
-    }
-
-    public void setHoldPayment(HoldPayment holdPayment) {
-        this.holdPayment = holdPayment;
-    }
-
 
     public User getUser() {
         return user;
@@ -94,5 +89,30 @@ public class WorkerRequest {
 
     public long getId() {
         return id;
+    }
+
+    public Date getDateCreate() {
+        return dateCreate;
+    }
+
+    @PrePersist
+    public void setDateCreate() {
+        this.dateCreate = new Date();
+        this.dateUpdate = dateCreate;
+    }
+
+    public Date getDateUpdate() {
+        return dateUpdate;
+    }
+
+    @PreUpdate
+    public void setDateUpdate() {
+        this.dateUpdate = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " User: " + user.toString() + " Vacancy: " + vacancy.toString() + " Price: " + price + " StateRequest: " + stateRequest +
+                " Worker: " + worker.toString() + " DateCreate: " + dateCreate.toString() + " DateUpdate: " + dateUpdate.toString();
     }
 }

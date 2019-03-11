@@ -20,14 +20,12 @@ public class UserControllerAspects {
 
     @Before("userController_pointCut() && args(user)")
     public void logginingForAdd(JoinPoint point, User user) {
-        logger.info("Before: " + user + " Name: " + user.getName() + " Surname: " + user.getSurname() +
-                " Phone Number: " + user.getPhoneNumber() + " Address: " + user.getEmail());
+        logger.info("Before: " + user.toString());
     }
 
     @After("userController_pointCut() && args(user, login, password)")
     public void logginingChangeUser(JoinPoint point, User user, String login, String password) {
-        logger.info("After: " + user + " Name: " + user.getName() + " Surname: " + user.getSurname() +
-                " Phone Number: " + user.getPhoneNumber() + " Address: " + user.getEmail() + " Login: " + user.getLogin() + "Password: " + user.getPassword());
+        logger.info("After: " + user.toString());
     }
 
     @Pointcut("execution(* com.no.company.workfordayserver.rest.UserController.*(..))")
