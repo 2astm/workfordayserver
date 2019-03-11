@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,51 +36,31 @@ public class User {
     @NotNull
     private String login;
 
-    @ManyToOne
-    @JoinColumn(name = "id_city")
-    @JsonBackReference
-    private City city;
-
     @Column(name = "dateRegister")
     private Date dateRegister;
 
     @Column(name = "dateUpdate")
     private Date dateUpdate;
 
-    @OneToMany(mappedBy = "user")
     @JsonManagedReference
-    private Set<WorkerRequest> workerRequests;
+    @ManyToOne
+    @JoinColumn(name = "id_city")
+    private City city;
 
-    @OneToMany(mappedBy = "userFromMessage")
-    @JsonManagedReference(value = "userFromMessage-message")
-    private Set<Message> messagesFrom;
-
-    @OneToMany(mappedBy = "userToMessage")
-    @JsonManagedReference(value = "userToMessage-message")
-    private Set<Message> messagesTo;
+    @OneToMany(mappedBy = "creator")
+    @JsonBackReference
+    private List<Vacancy> created_vacancies;
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "user-card")
-    private Set<Card> cards;
+    @JsonBackReference
+    private List<WorkerRequest> workerRequests;
 
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference(value = "user-dispute")
-    private Set<Dispute> disputes;
-
-    public Set<Dispute> getDisputes() {
-        return disputes;
+    public List<WorkerRequest> getWorkerRequests() {
+        return workerRequests;
     }
 
-    public void setDisputes(Set<Dispute> disputes) {
-        this.disputes = disputes;
-    }
-
-    public Set<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(Set<Card> cards) {
-        this.cards = cards;
+    public void setWorkerRequests(List<WorkerRequest> workerRequests) {
+        this.workerRequests = workerRequests;
     }
 
     public long getId() {
@@ -138,14 +119,6 @@ public class User {
         this.login = login;
     }
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     public Date getDateRegister() {
         return dateRegister;
     }
@@ -165,28 +138,20 @@ public class User {
         this.dateUpdate = new Date();
     }
 
-    public Set<WorkerRequest> getWorkerRequests() {
-        return workerRequests;
+    public City getCity() {
+        return city;
     }
 
-    public void setWorkerRequests(Set<WorkerRequest> workerRequests) {
-        this.workerRequests = workerRequests;
+    public void setCity(City city) {
+        this.city = city;
     }
 
-    public Set<Message> getMessagesFrom() {
-        return messagesFrom;
+    public List<Vacancy> getCreated_vacancies() {
+        return created_vacancies;
     }
 
-    public void setMessagesFrom(Set<Message> messagesFrom) {
-        this.messagesFrom = messagesFrom;
-    }
-
-    public Set<Message> getMessagesTo() {
-        return messagesTo;
-    }
-
-    public void setMessagesTo(Set<Message> messagesTo) {
-        this.messagesTo = messagesTo;
+    public void setCreated_vacancies(List<Vacancy> created_vacancies) {
+        this.created_vacancies = created_vacancies;
     }
 
     @Override

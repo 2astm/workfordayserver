@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,22 +19,13 @@ public class Vacancy {
     @Column(name = "description")
     private String description;
 
+    @JsonBackReference//(value = "vacancy-workerRequest")
     @ManyToOne
     @JoinColumn(name = "id_creator")
-    @JsonBackReference(value = "vacancy-workerRequest")
-    private User user;
+    private User creator;
 
     @Column(name = "price")
     private double price;
-
-    @ManyToOne
-    @JoinColumn(name = "id_city")
-    @JsonBackReference(value = "city-vacancy")
-    private City city;
-
-    @OneToMany(mappedBy = "vacancy")
-    @JsonManagedReference(value = "dispute-vacancy")
-    private Set<Dispute> disputes;
 
     @Column(name = "name")
     private String name;
@@ -54,11 +46,39 @@ public class Vacancy {
         NEW, IN_PROCCESS, CHECKING, READY, DELETED, REJECTED
     }
 
+    @Column(name = "state")
     private State state;
 
+    @Column(name = "lat")
     private double lat;
 
+    @Column(name = "lng")
     private double lng;
+
+    @ManyToOne
+    @JoinColumn(name = "id_city")
+    @JsonManagedReference//(value = "city-vacancy")
+    private City city;
+
+    @OneToMany(mappedBy = "vacancy")
+    @JsonBackReference
+    private List<WorkerRequest> workerRequestList;
+
+    public List<WorkerRequest> getWorkerRequestList() {
+        return workerRequestList;
+    }
+
+    public void setWorkerRequestList(List<WorkerRequest> workerRequestList) {
+        this.workerRequestList = workerRequestList;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 
     public double getLat() {
         return lat;
@@ -92,14 +112,6 @@ public class Vacancy {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -114,14 +126,6 @@ public class Vacancy {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public Set<Dispute> getDisputes() {
-        return disputes;
-    }
-
-    public void setDisputes(Set<Dispute> disputes) {
-        this.disputes = disputes;
     }
 
     public String getName() {
@@ -176,7 +180,7 @@ public class Vacancy {
 
     @Override
     public String toString() {
-        return "Id: " + id + " Lat: " + lat + " Lng: " + lng + " Discription: " + description + " User: " + user.toString() + " Price: " + price + " City: " + city.toString() + " Name: " + name +
+        return "Id: " + id + " Lat: " + lat + " Lng: " + lng + " Discription: " + description + " Creator: " + creator.toString() + " Price: " + price + " City: " + city.toString() + " Name: " + name +
                 " DateStart: " + dateStart + " DateEnd: " + dateEnd + " DateCreate: " + dateCreate + " DateUpdate: " + dateUpdate + " State: " + state;
     }
 }

@@ -3,6 +3,7 @@ package com.no.company.workfordayserver.rest;
 import com.no.company.workfordayserver.entities.City;
 import com.no.company.workfordayserver.entities.Region;
 import com.no.company.workfordayserver.services.RegionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class RegionController {
 
     private RegionService service;
 
+    @Autowired
     public void setService(RegionService service) {
         this.service = service;
     }

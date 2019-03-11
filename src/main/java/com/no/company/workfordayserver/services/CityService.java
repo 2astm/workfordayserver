@@ -27,7 +27,7 @@ public class CityService {
     }
 
     public List<City> getCitiesByRegion(String nameRegion){
-        return repository.findByRegion(nameRegion);
+        return repository.findByRegionName(nameRegion);
     }
 
     public void addCity(City s) {

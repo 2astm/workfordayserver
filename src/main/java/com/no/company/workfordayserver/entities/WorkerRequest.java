@@ -15,16 +15,6 @@ public class WorkerRequest {
     @GeneratedValue
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    @JsonBackReference
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "id_vacancy")
-    @JsonBackReference(value = "vacancy-workerRequest")
-    private Vacancy vacancy;
-
     private double price;
     public enum State_request {
         Waiting, Approved, Rejected, Closed
@@ -32,13 +22,20 @@ public class WorkerRequest {
     private State_request stateRequest;
 
     @OneToOne(mappedBy = "workerRequest")
-    @JsonManagedReference(value = "workerRequest-holdPayment")
-    private HoldPayment holdPayment;
-
-
-    @OneToOne(mappedBy = "workerRequest")
-    @JsonManagedReference(value = "workerRequest-Worker")
+    @JsonBackReference
     private Worker worker;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    @JsonManagedReference
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_vacancy")
+    @JsonManagedReference
+    private Vacancy vacancy;
+
 
     @Column(name = "dateCreate")
     private Date dateCreate;
@@ -49,15 +46,6 @@ public class WorkerRequest {
     public void setId(long id) {
         this.id = id;
     }
-
-    public HoldPayment getHoldPayment() {
-        return holdPayment;
-    }
-
-    public void setHoldPayment(HoldPayment holdPayment) {
-        this.holdPayment = holdPayment;
-    }
-
 
     public User getUser() {
         return user;
@@ -124,7 +112,7 @@ public class WorkerRequest {
 
     @Override
     public String toString() {
-        return "Id: " + id + " HoldPayment: " + holdPayment.toString() + " User: " + user.toString() + " Vacancy: " + vacancy.toString() + " Price: " + price + " StateRequest: " + stateRequest +
+        return "Id: " + id + " User: " + user.toString() + " Vacancy: " + vacancy.toString() + " Price: " + price + " StateRequest: " + stateRequest +
                 " Worker: " + worker.toString() + " DateCreate: " + dateCreate.toString() + " DateUpdate: " + dateUpdate.toString();
     }
 }
