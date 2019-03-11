@@ -15,8 +15,8 @@ public class Vacancy {
     @GeneratedValue
     private long id;
 
-    @Column(name = "discription")
-    private String discription;
+    @Column(name = "description")
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "id_creator")
@@ -84,12 +84,12 @@ public class Vacancy {
         this.id = id;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {
@@ -176,7 +176,7 @@ public class Vacancy {
 
     @Override
     public String toString() {
-        return "Id: " + id + " Lat: " + lat + " Lng: " + lng + " Discription: " + discription + " User: " + user.toString() + " Price: " + price + " City: " + city.toString() + " Name: " + name +
+        return "Id: " + id + " Lat: " + lat + " Lng: " + lng + " Discription: " + description + " User: " + user.toString() + " Price: " + price + " City: " + city.toString() + " Name: " + name +
                 " DateStart: " + dateStart + " DateEnd: " + dateEnd + " DateCreate: " + dateCreate + " DateUpdate: " + dateUpdate + " State: " + state;
     }
 }
