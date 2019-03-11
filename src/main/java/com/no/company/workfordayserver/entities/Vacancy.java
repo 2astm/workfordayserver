@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,9 +19,9 @@ public class Vacancy {
     @Column(name = "description")
     private String description;
 
+    @JsonBackReference//(value = "vacancy-workerRequest")
     @ManyToOne
     @JoinColumn(name = "id_creator")
-    //@JsonBackReference(value = "vacancy-workerRequest")
     private User creator;
 
     @Column(name = "price")
@@ -56,8 +57,28 @@ public class Vacancy {
 
     @ManyToOne
     @JoinColumn(name = "id_city")
-    //@JsonBackReference(value = "city-vacancy")
+    @JsonManagedReference//(value = "city-vacancy")
     private City city;
+
+    @OneToMany(mappedBy = "vacancy")
+    @JsonBackReference
+    private List<WorkerRequest> workerRequestList;
+
+    public List<WorkerRequest> getWorkerRequestList() {
+        return workerRequestList;
+    }
+
+    public void setWorkerRequestList(List<WorkerRequest> workerRequestList) {
+        this.workerRequestList = workerRequestList;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 
     public double getLat() {
         return lat;

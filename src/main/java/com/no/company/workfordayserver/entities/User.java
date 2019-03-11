@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,20 +42,25 @@ public class User {
     @Column(name = "dateUpdate")
     private Date dateUpdate;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "id_city")
-    //@JsonBackReference
     private City city;
 
     @OneToMany(mappedBy = "creator")
-    private Set<Vacancy> created_vacancies;
+    @JsonBackReference
+    private List<Vacancy> created_vacancies;
 
-    public Set<Vacancy> getCreated_vacancies() {
-        return created_vacancies;
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<WorkerRequest> workerRequests;
+
+    public List<WorkerRequest> getWorkerRequests() {
+        return workerRequests;
     }
 
-    public void setCreated_vacancies(Set<Vacancy> created_vacancies) {
-        this.created_vacancies = created_vacancies;
+    public void setWorkerRequests(List<WorkerRequest> workerRequests) {
+        this.workerRequests = workerRequests;
     }
 
     public long getId() {
@@ -113,14 +119,6 @@ public class User {
         this.login = login;
     }
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     public Date getDateRegister() {
         return dateRegister;
     }
@@ -137,5 +135,20 @@ public class User {
         this.dateUpdate = dateUpdate;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public List<Vacancy> getCreated_vacancies() {
+        return created_vacancies;
+    }
+
+    public void setCreated_vacancies(List<Vacancy> created_vacancies) {
+        this.created_vacancies = created_vacancies;
+    }
 }
 

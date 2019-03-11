@@ -21,18 +21,18 @@ public class WorkerRequest {
     private State_request stateRequest;
 
     @OneToOne(mappedBy = "workerRequest")
-//  @JsonManagedReference(value = "workerRequest-Worker")
+    @JsonBackReference
     private Worker worker;
 
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-//  @JsonBackReference
+    @JsonManagedReference
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_vacancy")
-//  @JsonBackReference(value = "vacancy-workerRequest")
+    @JsonManagedReference
     private Vacancy vacancy;
 
 
