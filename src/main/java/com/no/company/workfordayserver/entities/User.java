@@ -123,16 +123,19 @@ public class User {
         return dateRegister;
     }
 
-    public void setDateRegister(Date dateRegister) {
-        this.dateRegister = dateRegister;
+    @PrePersist
+    public void setDateRegister() {
+        this.dateRegister = new Date();
+        this.dateUpdate = dateRegister;
     }
 
     public Date getDateUpdate() {
         return dateUpdate;
     }
 
-    public void setDateUpdate(Date dateUpdate) {
-        this.dateUpdate = dateUpdate;
+    @PreUpdate
+    public void setDateUpdate() {
+        this.dateUpdate = new Date();
     }
 
     public City getCity() {
@@ -149,6 +152,12 @@ public class User {
 
     public void setCreated_vacancies(List<Vacancy> created_vacancies) {
         this.created_vacancies = created_vacancies;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " Name: " + name + " Surname: " + surname + " PhoneNumber: " + phoneNumber + " Email: " + email + " Login: " + login + " City; " + city.toString() +
+                " DateRegister: " + dateRegister.toString() + " DateUpdate: " + dateUpdate.toString();
     }
 }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Workers_request")
@@ -35,6 +36,12 @@ public class WorkerRequest {
     @JsonManagedReference
     private Vacancy vacancy;
 
+
+    @Column(name = "dateCreate")
+    private Date dateCreate;
+
+    @Column(name = "dateUpdate")
+    private Date dateUpdate;
 
     public void setId(long id) {
         this.id = id;
@@ -82,5 +89,30 @@ public class WorkerRequest {
 
     public long getId() {
         return id;
+    }
+
+    public Date getDateCreate() {
+        return dateCreate;
+    }
+
+    @PrePersist
+    public void setDateCreate() {
+        this.dateCreate = new Date();
+        this.dateUpdate = dateCreate;
+    }
+
+    public Date getDateUpdate() {
+        return dateUpdate;
+    }
+
+    @PreUpdate
+    public void setDateUpdate() {
+        this.dateUpdate = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " User: " + user.toString() + " Vacancy: " + vacancy.toString() + " Price: " + price + " StateRequest: " + stateRequest +
+                " Worker: " + worker.toString() + " DateCreate: " + dateCreate.toString() + " DateUpdate: " + dateUpdate.toString();
     }
 }
