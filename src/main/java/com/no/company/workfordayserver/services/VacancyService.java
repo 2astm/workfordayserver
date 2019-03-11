@@ -20,7 +20,7 @@ public class VacancyService {
     }
 
     public List<Vacancy> getAllVacancies(int page,int results) {
-        return repository.findAll(new PageRequest(page*results, page*results + results)).getContent();
+        return repository.findAll(new PageRequest(page, results)).getContent();
     }
 
     public Optional<Vacancy> getVacancyById(long id) { return repository.findById(id); }

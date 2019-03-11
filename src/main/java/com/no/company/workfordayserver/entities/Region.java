@@ -1,7 +1,9 @@
 package com.no.company.workfordayserver.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,10 +17,8 @@ public class Region {
     private String name;
 
     @OneToMany(mappedBy = "region")
-    @JsonManagedReference(value = "region-city")
-    private Set<City> cities;
-
-    public Region(){}
+    @JsonBackReference//(value = "region-city")
+    private List<City> cities;
 
     public long getId() {
         return id;
@@ -28,19 +28,19 @@ public class Region {
         this.id = id;
     }
 
-    public Set<City> getCity() {
-        return cities;
-    }
-
-    public void setCity(Set<City> cities) {
-        this.cities = cities;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 }
