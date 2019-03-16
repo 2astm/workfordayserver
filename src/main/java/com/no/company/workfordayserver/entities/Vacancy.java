@@ -19,7 +19,7 @@ public class Vacancy {
     @Column(name = "description")
     private String description;
 
-    @JsonBackReference//(value = "vacancy-workerRequest")
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_creator")
     private User creator;
@@ -43,6 +43,7 @@ public class Vacancy {
     private Date dateUpdate;
 
     @ManyToMany(mappedBy = "vacancies", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<Hashtag> hashtags;
 
     public enum State {
@@ -60,7 +61,7 @@ public class Vacancy {
 
     @ManyToOne
     @JoinColumn(name = "id_city")
-    @JsonManagedReference//(value = "city-vacancy")
+    @JsonManagedReference
     private City city;
 
     @OneToMany(mappedBy = "vacancy")
@@ -161,7 +162,9 @@ public class Vacancy {
 
     @PrePersist
     protected void onCreate() {
-        this.dateCreate = new Date();this.dateUpdate = new Date(); state= State.CHECKING;
+        this.dateCreate = new Date();
+        this.dateUpdate = new Date();
+        state= State.CHECKING;
     }
 
     public Date getDateUpdate() {
@@ -187,6 +190,7 @@ public class Vacancy {
 
     public void setHashtags(Set<Hashtag> hashtags) {
         this.hashtags = hashtags;
+    }
 
     @Override
     public String toString() {

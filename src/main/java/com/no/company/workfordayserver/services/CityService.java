@@ -22,7 +22,7 @@ public class CityService {
         return repository.findById(id);
     }
 
-    public City getCityByName(String name) {
+    public Optional<City> getCityByName(String name) {
         return repository.findByName(name);
     }
 

@@ -17,7 +17,7 @@ public class Region {
     private String name;
 
     @OneToMany(mappedBy = "region")
-    @JsonBackReference//(value = "region-city")
+    @JsonBackReference
     private List<City> cities;
 
     public long getId() {

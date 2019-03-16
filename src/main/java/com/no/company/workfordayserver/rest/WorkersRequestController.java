@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/workRequest")
@@ -46,8 +47,11 @@ public class WorkersRequestController {
     @RequestMapping(method = RequestMethod.GET, value = "/changeStatus")
     public void setStatus(@RequestParam(name = "id") long id, @RequestParam(name = "new_status") WorkerRequest.State_request state,
                           @RequestParam(name = "login")String login, @RequestParam(name = "password") String password){
-        if (state == WorkerRequest.State_request.Closed){
-            service.setStatusByRequestCreator(id, userService.getUserByLogin(login).getId(), state);
+
+        Optional<User> user = userService.getUserByLogin(login);
+
+        if (state == WorkerRequest.State_request.Closed && user.isPresent()){
+            service.setStatusByRequestCreator(id, user.get().getId(), state);
             return;
         }/*
         if (state != null){

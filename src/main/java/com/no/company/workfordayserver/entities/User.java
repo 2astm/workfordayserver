@@ -13,8 +13,6 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    @JoinColumn(name = "id_user", nullable = false)
     private long id;
 
     @Column(name = "name")

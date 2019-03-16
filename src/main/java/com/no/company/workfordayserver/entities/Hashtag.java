@@ -1,5 +1,6 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
@@ -16,19 +17,13 @@ public class Hashtag {
     private String name;
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(name="vacancies",
             joinColumns = @JoinColumn(name="id_hashtag", referencedColumnName="id_hashtag"),
             inverseJoinColumns = @JoinColumn(name="id_vacancy", referencedColumnName="id_vacancy")
     )
     private Set<Vacancy> vacancies;
 
-    public Hashtag() {
-    }
-
-    public Hashtag(String name, Set<Vacancy> vacancies) {
-        this.name = name;
-        this.vacancies = vacancies;
-    }
 
     public long getId() {
         return id;
@@ -52,5 +47,10 @@ public class Hashtag {
 
     public void setVacancies(Set<Vacancy> vacancies) {
         this.vacancies = vacancies;
+    }
+
+    @Override
+    public String toString() {
+        return "Id:" + id + " Name:" + name;
     }
 }

@@ -1,13 +1,12 @@
 package com.no.company.workfordayserver.rest;
 
-import com.no.company.workfordayserver.entities.City;
 import com.no.company.workfordayserver.entities.Region;
 import com.no.company.workfordayserver.services.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/region")
@@ -21,7 +20,7 @@ public class RegionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getByName/")
-    public Region RegionGetRegionObject(@RequestParam(name = "name")String name){
+    public Optional<Region> RegionGetRegionObject(@RequestParam(name = "name")String name){
         return service.getRegionByName(name);
     }
 

@@ -18,7 +18,7 @@ public class WorkerRequest {
     private double price;
     public enum State_request {
         Waiting, Approved, Rejected, Closed
-    };
+    }
     private State_request stateRequest;
 
     @OneToOne(mappedBy = "workerRequest")

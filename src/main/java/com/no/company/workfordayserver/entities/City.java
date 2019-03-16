@@ -1,22 +1,18 @@
 package com.no.company.workfordayserver.entities;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "cities")
 public class City {
     @Id
     @GeneratedValue
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    @JoinColumn(name = "id_city", nullable = false)
     private long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_region", nullable = false)
-    @JsonManagedReference//(value = "region-city")
+    @JsonManagedReference
     private Region region;
 
     @Column(name = "name")

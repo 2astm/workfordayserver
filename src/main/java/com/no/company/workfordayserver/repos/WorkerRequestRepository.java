@@ -13,14 +13,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface WorkerRequestRepository extends JpaRepository<WorkerRequest, Long> {
-    //public List<WorkerRequest> findByUser(User user);
-    public List<WorkerRequest> findAllByUser(User user);
-    public List<WorkerRequest> findAllByVacancy(Vacancy vacancy);
+    List<WorkerRequest> findAllByUser(User user);
+    List<WorkerRequest> findAllByVacancy(Vacancy vacancy);
 
     @Modifying
     @Transactional
     @Query(value = "update WorkerRequest set stateRequest = ?3 where id = ?1 and user.id = ?2")
-    public void setStateByRequestCreator(long id, long request_creator_id, WorkerRequest.State_request state);
+    void setStateByRequestCreator(long id, long request_creator_id, WorkerRequest.State_request state);
 
     @Modifying
     @Transactional
