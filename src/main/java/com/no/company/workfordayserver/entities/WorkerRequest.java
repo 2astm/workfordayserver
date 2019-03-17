@@ -36,7 +36,6 @@ public class WorkerRequest {
     @JsonManagedReference
     private Vacancy vacancy;
 
-
     @Column(name = "dateCreate")
     private Date dateCreate;
 

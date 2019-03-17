@@ -187,6 +187,7 @@ public class Vacancy {
 
     public void setHashtags(Set<Hashtag> hashtags) {
         this.hashtags = hashtags;
+    }
 
     @Override
     public String toString() {

@@ -1,7 +1,5 @@
 package com.no.company.workfordayserver.entities;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -16,9 +14,9 @@ public class Hashtag {
     private String name;
 
     @ManyToMany
-    @JoinTable(name="vacancies",
-            joinColumns = @JoinColumn(name="id_hashtag", referencedColumnName="id_hashtag"),
-            inverseJoinColumns = @JoinColumn(name="id_vacancy", referencedColumnName="id_vacancy")
+    @JoinTable(name="hashtag_vacancy",
+            joinColumns = @JoinColumn(name="id_hashtag"),
+            inverseJoinColumns = @JoinColumn(name="id_vacancy")
     )
     private Set<Vacancy> vacancies;
 
