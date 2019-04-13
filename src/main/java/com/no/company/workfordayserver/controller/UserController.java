@@ -10,6 +10,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -17,25 +18,19 @@ import java.util.Optional;
 public class UserController {
     private UserService userService;
 
-    /*
-      Todo create User
-     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void setUser(@RequestBody User newUser){
         userService.saveUser(newUser);
     }
-    /*
-      Todo Secutirty need
-      Todo getUserBy email and password
-     */
+
     @RequestMapping(value = "/get")
-   // @Secured(SecurityRoles.USER)
-    public User getUser(@RequestParam(name = "email") String email){
-        System.out.println(email);
-        Optional<User> user = userService.getUserByEmail(email);
-        if (user.isPresent())
+
+    public User getUser(Principal principal){
+        Optional<User> user = userService.getUserByEmail(principal.getName());
+        if (user.isPresent()) {
+            user.get().setPassword(null);
             return user.get();
-        else{
+        }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
     }

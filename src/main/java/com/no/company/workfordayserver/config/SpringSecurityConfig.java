@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.OneToMany;
 
@@ -17,10 +19,11 @@ import javax.persistence.OneToMany;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
 //        auth.inMemoryAuthentication()
 //                .withUser("user").password("{noop}password").roles(SecurityRoles.USER)
 //                .and()
@@ -35,7 +38,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/user/get/").hasRole(SecurityRoles.USER)
+                .antMatchers(HttpMethod.GET, "/user/get/").hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
@@ -44,5 +47,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder){
+        this.passwordEncoder = passwordEncoder;
     }
 }
