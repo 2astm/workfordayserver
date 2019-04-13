@@ -1,4 +1,4 @@
-package com.no.company.workfordayserver.entity;
+package com.no.company.workfordayserver.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

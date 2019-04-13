@@ -1,4 +1,4 @@
-package com.no.company.workfordayserver.entity;
+package com.no.company.workfordayserver.entities;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,10 +11,10 @@ public class WorkerApplication {
     @GeneratedValue
     private long id;
 
-    //@OneToOne
+    @OneToOne
     private User user;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entity.Hashtag.class)
+    @ManyToMany(targetEntity = Hashtag.class)
     private List<Hashtag> hashtags;
 
     @Column(name = "date_create")

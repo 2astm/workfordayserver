@@ -1,4 +1,4 @@
-package com.no.company.workfordayserver.entity;
+package com.no.company.workfordayserver.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,10 +17,10 @@ public class Hashtag {
     @NotNull
     private String name;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entity.WorkerApplication.class, mappedBy = "hashtags")
+    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashtags")
     private List<WorkerApplication> workerApplications;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entity.Work.class)
+    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class)
     private List<Work> works;
 
     public long getId() {

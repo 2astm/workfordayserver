@@ -1,9 +1,6 @@
-package com.no.company.workfordayserver.entity;
+package com.no.company.workfordayserver.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +12,9 @@ public class Work {
     @GeneratedValue
     private long id;
 
-    //many to one
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @NotNull
     private String title;
@@ -30,12 +28,12 @@ public class Work {
 
     private Status status;
 
-    private List<String> phoneNumbers;
+    private String phoneNumbers;
 
     private Date dateCreate;
     private Date dateUpdate;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entity.Hashtag.class, mappedBy = "works")
+    @ManyToMany(targetEntity = Hashtag.class, mappedBy = "works")
     private List<Hashtag> hashtags;
 
     enum Status{
@@ -50,12 +48,12 @@ public class Work {
         this.id = id;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {
@@ -114,11 +112,11 @@ public class Work {
         this.hashtags = hashtags;
     }
 
-    public List<String> getPhoneNumbers() {
+    public String getPhoneNumbers() {
         return phoneNumbers;
     }
 
-    public void setPhoneNumbers(List<String> phoneNumbers) {
+    public void setPhoneNumbers(String phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
 

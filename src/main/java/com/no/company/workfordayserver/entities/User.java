@@ -1,11 +1,12 @@
-package com.no.company.workfordayserver.entity;
+package com.no.company.workfordayserver.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
-@Entity
+@Entity(name = "users")
 public class User {
 
     @Id
@@ -23,8 +24,8 @@ public class User {
     @NotNull
     private String name;
 
-    //one to many
-    private Work work;
+    @OneToMany(mappedBy = "user")
+    private List<Work> works;
 
     private String phoneNumber;
 
@@ -101,11 +102,11 @@ public class User {
         this.dateUpdate = dateUpdate;
     }
 
-    public Work getWork() {
-        return work;
+    public List<Work> getWorks() {
+        return works;
     }
 
-    public void setWork(Work work) {
-        this.work = work;
+    public void setWorks(List<Work> works) {
+        this.works = works;
     }
 }
