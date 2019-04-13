@@ -1,4 +1,4 @@
-package com.no.company.workfordayserver;
+package com.no.company.workfordayserver.config;
 
 
 import org.springframework.context.annotation.Configuration;

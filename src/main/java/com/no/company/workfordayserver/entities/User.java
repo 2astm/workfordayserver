@@ -90,16 +90,19 @@ public class User {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
+    @PrePersist
+    public void setDateCreate() {
+        dateCreate = new Date();
+        dateUpdate = dateCreate;
     }
 
     public Date getDateUpdate() {
         return dateUpdate;
     }
 
-    public void setDateUpdate(Date dateUpdate) {
-        this.dateUpdate = dateUpdate;
+    @PreUpdate
+    public void setDateUpdate(){
+        dateUpdate = new Date();
     }
 
     public List<Work> getWorks() {
