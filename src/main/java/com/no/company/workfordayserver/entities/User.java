@@ -125,4 +125,20 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setUser(User user){
+        if (user.email != null)
+            this.email = user.email;
+        if (user.password != null)
+            this.password = user.password;
+        if (user.name != null)
+            this.name = user.name;
+        if (user.phoneNumber != null)
+            this.phoneNumber = user.phoneNumber;
+        if (user.photo != null)
+            this.photo = user.photo;
+        if (user.role != null)
+            this.role = user.role;
+
+    }
 }

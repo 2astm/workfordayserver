@@ -2,6 +2,7 @@ package com.no.company.workfordayserver.repos;
 
 import com.no.company.workfordayserver.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.Email;

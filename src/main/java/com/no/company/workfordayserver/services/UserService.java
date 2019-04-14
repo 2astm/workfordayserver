@@ -3,6 +3,7 @@ package com.no.company.workfordayserver.services;
 import com.no.company.workfordayserver.consts.SecurityRoles;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.repos.UserRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,8 +24,12 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-    public Optional<User> getUserByEmail(@Email String email){
-        return userRepository.findByEmail(email);
+    public User getUserByEmail(@Email String email) throws UsernameNotFoundException {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent())
+            return userOptional.get();
+        else
+            throw new UsernameNotFoundException("User not found");
     }
 
     public void saveUser(User user){
@@ -32,13 +37,17 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public void editUser(User user, String email) throws UsernameNotFoundException{
+        if (user.getPassword()!=null)
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User olduser = getUserByEmail(email);
+        olduser.setUser(user);
+        userRepository.save(olduser);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> userOptional = getUserByEmail(email);
-        if (!userOptional.isPresent()) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        User user = userOptional.get();
+        User user = getUserByEmail(email);
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
         return (UserDetails) new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Arrays.asList(authority));
     }
