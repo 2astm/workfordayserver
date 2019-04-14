@@ -6,6 +6,7 @@ import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +35,11 @@ public class UserController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public void editUser(Principal principal, @RequestBody User user){
+        user.setIsUser(null);
         userService.editUser(user, principal.getName());
     }
 
-    @RequestMapping(value = "/editChoosedUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/editchooseduser", method = RequestMethod.POST)
     public void editChoosedUser(@RequestBody UserEdit userEdit){
         userService.editUser(userEdit, userEdit.getUserMailToEdit());
     }

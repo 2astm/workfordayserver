@@ -1,6 +1,5 @@
 package com.no.company.workfordayserver.entities;
 
-import com.no.company.workfordayserver.consts.SecurityRoles;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -40,7 +39,8 @@ public class User {
     @Column(name = "date_update")
     private Date dateUpdate;
 
-    String role;
+    @NotNull
+    private Boolean isUser;
 
     public long getId() {
         return id;
@@ -98,7 +98,7 @@ public class User {
     public void onCreate() {
         dateCreate = new Date();
         dateUpdate = dateCreate;
-        role = SecurityRoles.USER;
+        isUser = true;
     }
 
     public Date getDateUpdate() {
@@ -118,12 +118,12 @@ public class User {
         this.works = works;
     }
 
-    public String getRole() {
-        return role;
+    public Boolean getIsUser() {
+        return isUser;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setIsUser(Boolean user) {
+        this.isUser = user;
     }
 
     public void setUser(User user){
@@ -137,8 +137,8 @@ public class User {
             this.phoneNumber = user.phoneNumber;
         if (user.photo != null)
             this.photo = user.photo;
-        if (user.role != null)
-            this.role = user.role;
+        if (user.isUser!=null && !user.isUser)
+            this.isUser = user.isUser;
 
     }
 }

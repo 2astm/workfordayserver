@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Email;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -48,8 +49,9 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = getUserByEmail(email);
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-        return (UserDetails) new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Arrays.asList(authority));
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + (user.getIsUser()?SecurityRoles.USER:SecurityRoles.ADMIN));
+        System.out.println(authority.getAuthority());
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(authority));
     }
 
     @Autowired
