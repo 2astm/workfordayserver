@@ -28,9 +28,9 @@ public class UserController {
 
     @RequestMapping(value = "/get")
     public User getUser(Principal principal){
-        User user = userService.getUserByEmail(principal.getName());
-        user.setPassword(null);
-        return user;
+      User user = userService.getUserByEmail(principal.getName());
+      user.setPassword(null);
+      return user;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -39,10 +39,18 @@ public class UserController {
         userService.editUser(user, principal.getName());
     }
 
+    @RequestMapping(value = "/delete")
+    public void delete(Principal principal){
+        userService.removeUser(principal.getName());
+    }
+
+    // ?? Нужно ли?
     @RequestMapping(value = "/editchooseduser", method = RequestMethod.POST)
     public void editChoosedUser(@RequestBody UserEdit userEdit){
+        userEdit.setPassword(null);
         userService.editUser(userEdit, userEdit.getUserMailToEdit());
     }
+
 
     @Autowired
     public void setUserService(UserService userService) {

@@ -9,7 +9,7 @@ public class WorkerApplication {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @OneToOne
     private User user;
@@ -23,11 +23,11 @@ public class WorkerApplication {
     @Column(name = "date_update")
     private Date dateUpdate;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

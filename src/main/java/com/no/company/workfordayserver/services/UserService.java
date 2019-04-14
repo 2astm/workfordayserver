@@ -46,12 +46,13 @@ public class UserService implements UserDetailsService {
         userRepository.save(olduser);
     }
 
+    public void removeUser(@Email String email){
+        userRepository.deleteByEmail(email);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = getUserByEmail(email);
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + (user.getIsUser()?SecurityRoles.USER:SecurityRoles.ADMIN));
-        System.out.println(authority.getAuthority());
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(authority));
+        return getUserByEmail(email);
     }
 
     @Autowired

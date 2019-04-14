@@ -1,5 +1,8 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -10,21 +13,22 @@ public class Work {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference("user_work")
     private User user;
 
     @NotNull
     private String title;
 
-    private double budget;
+    private Double budget;
 
     private String description;
 
-    private double lat;
-    private double lon;
+    private Double lat;
+    private Double ln;
 
     private Status status;
 
@@ -40,11 +44,11 @@ public class Work {
         ACTIVE, DELETED, CANCELLED
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -64,11 +68,11 @@ public class Work {
         this.title = title;
     }
 
-    public double getBudget() {
+    public Double getBudget() {
         return budget;
     }
 
-    public void setBudget(double budget) {
+    public void setBudget(Double budget) {
         this.budget = budget;
     }
 
@@ -80,20 +84,20 @@ public class Work {
         this.description = description;
     }
 
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public double getLon() {
-        return lon;
+    public Double getLn() {
+        return ln;
     }
 
-    public void setLon(double lon) {
-        this.lon = lon;
+    public void setLon(Double ln) {
+        this.ln = ln;
     }
 
     public Status getStatus() {
@@ -124,15 +128,37 @@ public class Work {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
+    @PrePersist
+    public void onCreate() {
+        dateCreate = new Date();
+        dateUpdate = dateCreate;
+        status = Status.ACTIVE;
     }
 
     public Date getDateUpdate() {
         return dateUpdate;
     }
 
-    public void setDateUpdate(Date dateUpdate) {
-        this.dateUpdate = dateUpdate;
+    @PreUpdate
+    public void onUpdate(){
+        dateUpdate = new Date();
+    }
+
+    public void setWork(Work work){
+        if (work.title != null)
+            title = work.title;
+        if (work.budget != null)
+            budget = work.budget;
+        if (work.description != null)
+            description = work.description;
+        if (work.lat != null)
+            lat = work.lat;
+        if (work.ln != null)
+            ln = work.ln;
+        if (work.hashtags != null)
+            hashtags = work.hashtags;
+        if (work.phoneNumbers != null)
+            phoneNumbers = work.phoneNumbers;
+
     }
 }
