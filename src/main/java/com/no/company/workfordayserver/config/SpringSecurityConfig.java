@@ -7,10 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.OneToMany;
@@ -24,10 +21,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("{noop}password").roles(SecurityRoles.USER)
-//                .and()
-//                .withUser("admin").password("{noop}password").roles(SecurityRoles.ADMIN, SecurityRoles.USER);
     }
 
 
@@ -40,7 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/user/get/","/user/delete/").hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
                 .antMatchers(HttpMethod.POST, "/user/edit/", "/work/addwork", "/work/changework").hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
-                .antMatchers(HttpMethod.POST, "/user/editchooseduser/").hasRole(SecurityRoles.ADMIN)
+                .antMatchers(HttpMethod.POST, "/user/addAdmin/").hasRole(SecurityRoles.ADMIN)
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
