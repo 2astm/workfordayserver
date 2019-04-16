@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.OneToMany;
 
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -20,6 +19,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //auth.inMemoryAuthentication().withUser("asdf").password("sdfsdf").roles("rsdfdsf");
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
@@ -33,8 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/user/get/","/user/delete/").hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
                 .antMatchers(HttpMethod.POST, "/user/edit/", "/work/addwork", "/work/changework").hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
-                .antMatchers(HttpMethod.POST, "/user/addAdmin/").hasRole(SecurityRoles.ADMIN)
-                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.GET, "/user/addAdmin/").hasRole(SecurityRoles.ADMIN)
                 .and()
                 .csrf().disable()
                 .formLogin().disable();

@@ -23,6 +23,7 @@ public class WorkService {
     public void editWork(Work work, User user) throws NotFoundException {
         Optional<Work> workold = workRepository.findById(work.getId());
         if (!workold.isPresent()) throw new NotFoundException("Work not found");
+
         if (user.getIsUser() && !workold.get().getUser().getId().equals(user.getId())) throw new AccessDeniedException("You can't edit this work");
         workold.get().setWork(work);
         workRepository.save(workold.get());

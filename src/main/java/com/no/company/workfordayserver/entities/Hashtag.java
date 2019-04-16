@@ -20,7 +20,7 @@ public class Hashtag {
     @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashtags")
     private List<WorkerApplication> workerApplications;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class)
+    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashtags")
     private List<Work> works;
 
     public Long getId() {
