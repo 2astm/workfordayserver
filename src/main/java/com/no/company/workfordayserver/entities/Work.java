@@ -37,7 +37,7 @@ public class Work {
     private Date dateCreate;
     private Date dateUpdate;
 
-    @ManyToMany(targetEntity = Hashtag.class, mappedBy = "works")
+    @ManyToMany(targetEntity = Hashtag.class)
     private List<Hashtag> hashtags;
 
     enum Status{

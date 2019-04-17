@@ -23,6 +23,7 @@ public class WorkController {
     @RequestMapping(value = "/addwork", method = RequestMethod.POST)
     public void addWork(Authentication authentication, @RequestBody Work work){
         workService.saveWork(work, (User) authentication.getPrincipal());
+        System.out.println(work.getHashtags().get(0).getName());
     }
 
     /*
@@ -32,6 +33,7 @@ public class WorkController {
     public void changeWork(Authentication authentication, @RequestBody Work work) throws NotFoundException {
         if (work.getId() == null) throw new NullPointerException("ID not selected");
         workService.editWork(work, (User) authentication.getPrincipal());
+        System.out.println(work.getHashtags());
     }
     /*
     Todo get list of works (need pages), also filters

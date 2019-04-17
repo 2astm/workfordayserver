@@ -5,6 +5,7 @@ import com.no.company.workfordayserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.util.zip.DataFormatException;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -12,7 +13,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void setUser(@RequestBody User newUser){
+    public void setUser(@RequestBody User newUser) throws DataFormatException {
         userService.saveUser(newUser);
     }
 

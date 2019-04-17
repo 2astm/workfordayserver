@@ -70,7 +70,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + (isUser? SecurityRoles.USER:SecurityRoles.ADMIN));
+            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + (isUser? SecurityRoles.USER:SecurityRoles.ADMIN));
         return Collections.singletonList(authority);
     }
 

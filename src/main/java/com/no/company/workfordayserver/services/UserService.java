@@ -1,5 +1,6 @@
 package com.no.company.workfordayserver.services;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.no.company.workfordayserver.consts.SecurityRoles;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.repos.UserRepository;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Email;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.zip.DataFormatException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -33,14 +35,20 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user) throws DataFormatException {
+        if (user.getPhoneNumber()!=null && !user.getPhoneNumber().matches("(\\+38[0-9]{10};)+")) throw new DataFormatException("Phone numbers must be in format +number;+number;+number");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    public void editUser(User user, String email) throws UsernameNotFoundException{
+    public void editUser(User user, String email) throws UsernameNotFoundException {
         if (user.getPassword()!=null)
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getPhoneNumber()!=null && !user.getPhoneNumber().matches("(\\+38[0-9]{10};)+")) {
+            //TODO need new exception;
+            System.out.println("Phone number error");
+            return;
+        }
         User olduser = getUserByEmail(email);
         olduser.setUser(user);
         userRepository.save(olduser);
