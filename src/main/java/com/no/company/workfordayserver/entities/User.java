@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -38,6 +39,7 @@ public class User implements UserDetails {
     @JsonManagedReference("user_work")
     private List<Work> works;
 
+    @Pattern(regexp = "\"(\\\\+38[0-9]{10};)+\"")
     private String phoneNumber;
 
     @Lob
