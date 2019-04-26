@@ -1,9 +1,6 @@
 package com.no.company.workfordayserver.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -15,6 +12,7 @@ public class Hashtag {
     private Long id;
 
     @NotNull
+    @Column(unique = true)
     private String name;
 
     @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashtags")

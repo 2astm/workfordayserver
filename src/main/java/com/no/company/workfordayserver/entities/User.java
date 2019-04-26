@@ -1,7 +1,6 @@
 package com.no.company.workfordayserver.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.no.company.workfordayserver.consts.SecurityRoles;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,7 +39,7 @@ public class User implements UserDetails {
     private List<Work> works;
 
     @Pattern(regexp = "\"(\\\\+38[0-9]{10};)+\"")
-    private String phoneNumber;
+    private String phoneNumbers;
 
     @Lob
     private byte[] photo;
@@ -118,12 +117,12 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumbers(String phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 
     public byte[] getPhoto() {
@@ -177,8 +176,8 @@ public class User implements UserDetails {
             this.password = user.password;
         if (user.name != null)
             this.name = user.name;
-        if (user.phoneNumber != null)
-            this.phoneNumber = user.phoneNumber;
+        if (user.phoneNumbers != null)
+            this.phoneNumbers = user.phoneNumbers;
         if (user.photo != null)
             this.photo = user.photo;
         if (user.isUser!=null && !user.isUser)

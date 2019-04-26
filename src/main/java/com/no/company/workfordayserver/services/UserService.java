@@ -36,7 +36,6 @@ public class UserService implements UserDetailsService {
     }
 
     public void saveUser(User user) throws DataFormatException {
-        if (user.getPhoneNumber()!=null && !user.getPhoneNumber().matches("(\\+38[0-9]{10};)+")) throw new DataFormatException("Phone numbers must be in format +number;+number;+number");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -44,11 +43,6 @@ public class UserService implements UserDetailsService {
     public void editUser(User user, String email) throws UsernameNotFoundException {
         if (user.getPassword()!=null)
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getPhoneNumber()!=null && !user.getPhoneNumber().matches("(\\+38[0-9]{10};)+")) {
-            //TODO need new exception;
-            System.out.println("Phone number error");
-            return;
-        }
         User olduser = getUserByEmail(email);
         olduser.setUser(user);
         userRepository.save(olduser);
