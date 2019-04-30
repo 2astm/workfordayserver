@@ -1,5 +1,9 @@
 package com.no.company.workfordayserver.jsonmodels;
 
+import com.no.company.workfordayserver.entities.Hashtag;
+
+import java.util.List;
+
 public class FiltersForWork {
 
     private Double lowBudget;
@@ -7,6 +11,7 @@ public class FiltersForWork {
     private Double lat;
     private Double ln;
     private Double radius;
+    private List<Hashtag> hashtagList;
     private int page;
     private int results;
 
@@ -65,5 +70,13 @@ public class FiltersForWork {
 
     public void setRadius(Double radius) {
         this.radius = radius;
+    }
+
+    public List<Hashtag> getHashtagList() {
+        return hashtagList;
+    }
+
+    public void setHashtagList(List<Hashtag> hashtagList) {
+        this.hashtagList = hashtagList;
     }
 }

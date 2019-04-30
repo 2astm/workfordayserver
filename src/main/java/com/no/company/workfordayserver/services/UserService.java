@@ -1,24 +1,22 @@
 package com.no.company.workfordayserver.services;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.no.company.workfordayserver.consts.SecurityRoles;
 import com.no.company.workfordayserver.entities.User;
+import com.no.company.workfordayserver.entities.UserSaveWork;
+import com.no.company.workfordayserver.entities.Work;
 import com.no.company.workfordayserver.repos.UserRepository;
-import javassist.NotFoundException;
+import com.no.company.workfordayserver.repos.UserSaveWorkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Email;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 
@@ -40,12 +38,16 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public void editUser(User user, String email) throws UsernameNotFoundException {
+    public void editUser(User user, Long userID) throws UsernameNotFoundException {
         if (user.getPassword()!=null)
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User olduser = getUserByEmail(email);
-        olduser.setUser(user);
-        userRepository.save(olduser);
+        User oldUser = userRepository.getOne(userID);
+        oldUser.setUser(user);
+        userRepository.save(oldUser);
+    }
+
+    public void changeIsUser(Boolean isUser, String email){
+        userRepository.updateIsUser(isUser, email);
     }
 
     public void removeUser(@Email String email){

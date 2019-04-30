@@ -3,6 +3,7 @@ package com.no.company.workfordayserver.controller;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.zip.DataFormatException;
@@ -25,9 +26,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public void editUser(Principal principal, @RequestBody User user){
+    public void editUser(Authentication authentication, @RequestBody User user){
         user.setIsUser(null);
-        userService.editUser(user, principal.getName());
+        userService.editUser(user, ((User) authentication.getPrincipal()).getId());
     }
 
     @RequestMapping(value = "/delete")
@@ -36,10 +37,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addadmin")
-    public void setPermisionToUser(@RequestParam(name = "email") String email){
-        User user = new User();
-        user.setIsUser(false);
-        userService.editUser(user, email);
+    public void setPermissionToUser(@RequestParam(name = "email") String email){
+        userService.changeIsUser(false, email);
     }
 
 

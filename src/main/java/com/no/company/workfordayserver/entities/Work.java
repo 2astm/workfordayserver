@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
@@ -32,12 +33,13 @@ public class Work {
 
     private Status status;
 
+    @Pattern(regexp = "([+]38[0-9]{10};)+")
     private String phoneNumbers;
 
     private Date dateCreate;
     private Date dateUpdate;
 
-    @ManyToMany(targetEntity = Hashtag.class)
+    @ManyToMany(fetch = FetchType.EAGER,targetEntity = Hashtag.class, cascade = CascadeType.ALL)
     private List<Hashtag> hashtags;
 
     enum Status{

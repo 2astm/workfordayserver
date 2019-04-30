@@ -1,6 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,9 @@ public class WorkerApplication {
 
     @OneToOne
     private User user;
+
+    @Pattern(regexp = "([+]38[0-9]{10};)+")
+    private String phoneNumbers;
 
     @ManyToMany(targetEntity = Hashtag.class)
     private List<Hashtag> hashtags;
@@ -43,16 +47,19 @@ public class WorkerApplication {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
+    @PrePersist
+    public void setDateCreate() {
+        this.dateCreate = new Date();
+        this.dateUpdate = new Date();
     }
 
     public Date getDateUpdate() {
         return dateUpdate;
     }
 
-    public void setDateUpdate(Date dateUpdate) {
-        this.dateUpdate = dateUpdate;
+    @PreUpdate
+    public void setDateUpdate() {
+        this.dateUpdate = new Date();
     }
 
     public List<Hashtag> getHashtags() {
@@ -61,5 +68,20 @@ public class WorkerApplication {
 
     public void setHashtags(List<Hashtag> hashtags) {
         this.hashtags = hashtags;
+    }
+
+    public String getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(String phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
+
+    public void setWorkerApplication(WorkerApplication workerApplication){
+        if (workerApplication.hashtags != null)
+            this.hashtags = workerApplication.hashtags;
+        if (workerApplication.phoneNumbers != null)
+            this.phoneNumbers = workerApplication.phoneNumbers;
     }
 }

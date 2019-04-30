@@ -1,6 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.no.company.workfordayserver.consts.SecurityRoles;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,7 +39,13 @@ public class User implements UserDetails {
     @JsonManagedReference("user_work")
     private List<Work> works;
 
-    @Pattern(regexp = "\"(\\\\+38[0-9]{10};)+\"")
+    @OneToMany(mappedBy = "user")
+    private List<UserSaveWork> userSavedWorks;
+
+    @ManyToMany(targetEntity = WorkerApplication.class)
+    private List<WorkerApplication> savedWorkerApplication;
+
+    @Pattern(regexp = "([+]38[0-9]{10};)+")
     private String phoneNumbers;
 
     @Lob
@@ -167,6 +174,22 @@ public class User implements UserDetails {
 
     public void setIsUser(Boolean user) {
         this.isUser = user;
+    }
+
+    public List<UserSaveWork> getUserSavedWorks() {
+        return userSavedWorks;
+    }
+
+    public void setUserSavedWorks(List<UserSaveWork> userSavedWorks) {
+        this.userSavedWorks = userSavedWorks;
+    }
+
+    public List<WorkerApplication> getSavedWorkerApplication() {
+        return savedWorkerApplication;
+    }
+
+    public void setSavedWorkerApplication(List<WorkerApplication> savedWorkerApplication) {
+        this.savedWorkerApplication = savedWorkerApplication;
     }
 
     public void setUser(User user){
