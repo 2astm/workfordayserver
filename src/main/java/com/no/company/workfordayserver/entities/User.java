@@ -42,8 +42,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<UserSaveWork> userSavedWorks;
 
-    @ManyToMany(targetEntity = WorkerApplication.class)
-    private List<WorkerApplication> savedWorkerApplication;
+    @OneToMany(mappedBy = "user")
+    private List<UserSaveWorkerApplication> savedWorkerApplication;
 
     @Pattern(regexp = "([+]38[0-9]{10};)+")
     private String phoneNumbers;
@@ -184,11 +184,11 @@ public class User implements UserDetails {
         this.userSavedWorks = userSavedWorks;
     }
 
-    public List<WorkerApplication> getSavedWorkerApplication() {
+    public List<UserSaveWorkerApplication> getSavedWorkerApplication() {
         return savedWorkerApplication;
     }
 
-    public void setSavedWorkerApplication(List<WorkerApplication> savedWorkerApplication) {
+    public void setSavedWorkerApplication(List<UserSaveWorkerApplication> savedWorkerApplication) {
         this.savedWorkerApplication = savedWorkerApplication;
     }
 

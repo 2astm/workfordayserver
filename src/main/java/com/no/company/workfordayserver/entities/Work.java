@@ -1,7 +1,6 @@
 package com.no.company.workfordayserver.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -39,10 +38,10 @@ public class Work {
     private Date dateCreate;
     private Date dateUpdate;
 
-    @ManyToMany(fetch = FetchType.EAGER,targetEntity = Hashtag.class, cascade = CascadeType.ALL)
-    private List<Hashtag> hashtags;
+    @ManyToMany(fetch = FetchType.EAGER,targetEntity = Hashtag.class, cascade = CascadeType.PERSIST)
+    private List<Hashtag> hashTags;
 
-    enum Status{
+    public enum Status{
         ACTIVE, DELETED, CANCELLED
     }
 
@@ -110,12 +109,12 @@ public class Work {
         this.status = status;
     }
 
-    public List<Hashtag> getHashtags() {
-        return hashtags;
+    public List<Hashtag> getHashTags() {
+        return hashTags;
     }
 
-    public void setHashtags(List<Hashtag> hashtags) {
-        this.hashtags = hashtags;
+    public void setHashTags(List<Hashtag> hashTags) {
+        this.hashTags = hashTags;
     }
 
     public String getPhoneNumbers() {
@@ -157,8 +156,8 @@ public class Work {
             lat = work.lat;
         if (work.ln != null)
             ln = work.ln;
-        if (work.hashtags != null)
-            hashtags = work.hashtags;
+        if (work.hashTags != null)
+            hashTags = work.hashTags;
         if (work.phoneNumbers != null)
             phoneNumbers = work.phoneNumbers;
 
