@@ -15,10 +15,10 @@ public class Hashtag {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashTags")
+    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashtags")
     private List<WorkerApplication> workerApplications;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashTags")
+    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashtags")
     private List<Work> works;
 
     public Long getId() {

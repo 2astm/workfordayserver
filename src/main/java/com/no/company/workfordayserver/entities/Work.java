@@ -39,7 +39,7 @@ public class Work {
     private Date dateUpdate;
 
     @ManyToMany(fetch = FetchType.EAGER,targetEntity = Hashtag.class, cascade = CascadeType.PERSIST)
-    private List<Hashtag> hashTags;
+    private List<Hashtag> hashtags;
 
     public enum Status{
         ACTIVE, DELETED, CANCELLED
@@ -110,11 +110,11 @@ public class Work {
     }
 
     public List<Hashtag> getHashTags() {
-        return hashTags;
+        return hashtags;
     }
 
     public void setHashTags(List<Hashtag> hashTags) {
-        this.hashTags = hashTags;
+        this.hashtags = hashTags;
     }
 
     public String getPhoneNumbers() {
@@ -156,8 +156,8 @@ public class Work {
             lat = work.lat;
         if (work.ln != null)
             ln = work.ln;
-        if (work.hashTags != null)
-            hashTags = work.hashTags;
+        if (work.hashtags != null)
+            hashtags = work.hashtags;
         if (work.phoneNumbers != null)
             phoneNumbers = work.phoneNumbers;
 
