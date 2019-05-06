@@ -21,6 +21,8 @@ public class WorkerApplication {
     @Pattern(regexp = "([+]38[0-9]{10};)+")
     private String phoneNumbers;
 
+    private String description;
+
     @ManyToMany(targetEntity = Hashtag.class)
     @JsonManagedReference("workerApplication_hashtags")
     private List<Hashtag> hashTags;
@@ -80,6 +82,14 @@ public class WorkerApplication {
 
     public void setPhoneNumbers(String phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setWorkerApplication(WorkerApplication workerApplication){
