@@ -3,7 +3,7 @@ package com.no.company.workfordayserver.services;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.WorkerApplication;
 import com.no.company.workfordayserver.jsonmodels.FiltersForWork;
-import com.no.company.workfordayserver.repos.jpa.WorkerApplicationRepostiory;
+import com.no.company.workfordayserver.repos.WorkerApplicationRepostiory;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

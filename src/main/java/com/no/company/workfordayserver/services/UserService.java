@@ -1,7 +1,7 @@
 package com.no.company.workfordayserver.services;
 
 import com.no.company.workfordayserver.entities.User;
-import com.no.company.workfordayserver.repos.jpa.UserRepository;
+import com.no.company.workfordayserver.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,7 +1,7 @@
 package com.no.company.workfordayserver.services;
 
 import com.no.company.workfordayserver.entities.UserSaveWorkerApplication;
-import com.no.company.workfordayserver.repos.jpa.UserSaveWorkerApplicationRepository;
+import com.no.company.workfordayserver.repos.UserSaveWorkerApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
