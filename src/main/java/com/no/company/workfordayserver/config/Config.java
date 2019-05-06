@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableAspectJAutoProxy
-@EnableElasticsearchRepositories(basePackages = "com.no.company.workfordayserver.repos.elastic")
 public class Config {
 
     @Bean
