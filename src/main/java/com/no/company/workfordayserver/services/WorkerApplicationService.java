@@ -3,9 +3,11 @@ package com.no.company.workfordayserver.services;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.WorkerApplication;
 import com.no.company.workfordayserver.jsonmodels.FiltersForWork;
-import com.no.company.workfordayserver.repos.WorkerApplicationRepostiory;
+import com.no.company.workfordayserver.repos.jpa.WorkerApplicationRepostiory;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,10 @@ public class WorkerApplicationService {
     public List<WorkerApplication> getWorks(FiltersForWork filtersForWorkerApplication){
         //TODO FILTER
         return null;
+    }
+
+    public List<WorkerApplication> getWorks(Integer page, Integer resutls){
+       return workerApplicationRepostiory.findAll(PageRequest.of(page, resutls, Sort.by("dateUpdate"))).getContent();
     }
 
     @Autowired

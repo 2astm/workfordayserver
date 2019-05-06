@@ -30,19 +30,22 @@ public class User implements UserDetails {
     private String email;
 
     @NotNull
+    @JsonIgnore
     private String password;
 
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference("user_work")
+    @OneToMany(mappedBy = "user")   
+    @JsonIgnore
     private List<Work> works;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<UserSaveWork> userSavedWorks;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<UserSaveWorkerApplication> savedWorkerApplication;
 
     @Pattern(regexp = "([+]38[0-9]{10};)+")
@@ -52,12 +55,15 @@ public class User implements UserDetails {
     private byte[] photo;
 
     @Column(name = "date_create")
+    @JsonIgnore
     private Date dateCreate;
 
     @Column(name = "date_update")
+    @JsonIgnore
     private Date dateUpdate;
 
     @NotNull
+    @JsonIgnore
     private Boolean isUser;
 
     public Long getId() {
@@ -77,6 +83,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + (isUser? SecurityRoles.USER:SecurityRoles.ADMIN));
         return Collections.singletonList(authority);
@@ -93,21 +100,25 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

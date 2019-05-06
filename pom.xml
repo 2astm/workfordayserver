@@ -70,6 +70,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!-- elastic search -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>3.0.8.RELEASE</version>
+        </dependency>
 
     </dependencies>
 

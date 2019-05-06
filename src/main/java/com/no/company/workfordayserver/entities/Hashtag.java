@@ -1,10 +1,13 @@
 package com.no.company.workfordayserver.entities;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+//@Document(indexName = "items", type = "items", shards = 1)
 public class Hashtag {
 
     @Id

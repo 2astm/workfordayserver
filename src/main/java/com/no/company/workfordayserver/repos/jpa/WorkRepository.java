@@ -1,4 +1,4 @@
-package com.no.company.workfordayserver.repos;
+package com.no.company.workfordayserver.repos.jpa;
 
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.Work;

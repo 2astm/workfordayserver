@@ -38,7 +38,7 @@ public class Work {
     private Date dateCreate;
     private Date dateUpdate;
 
-    @ManyToMany(fetch = FetchType.EAGER,targetEntity = Hashtag.class, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER,targetEntity = Hashtag.class)
     private List<Hashtag> hashTags;
 
     public enum Status{

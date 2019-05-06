@@ -67,6 +67,7 @@ public class WorkController {
         return userSaveWorkService.getSavedWorks(((User) authentication.getPrincipal()).getId(), page, results);
     }
 
+
     @Autowired
     public void setWorkService(WorkService workService) {
         this.workService = workService;

@@ -48,15 +48,29 @@ public class WorkerApplicationController {
      }
 
      @RequestMapping(value ="/getwithfilters")
-     public List<WorkerApplication> getWorks(Authentication authentication, @RequestBody FiltersForWorkerApplication filtersForWorkerApplication){
+     public List<WorkerApplication> getWorkerApplications(Authentication authentication, @RequestBody FiltersForWorkerApplication filtersForWorkerApplication){
             /*
     Todo get list of works (need pages), also filters
      */
          return null;
      }
 
+     @RequestMapping(value = "/getapplications")
+     public List<WorkerApplication> getApplications(@RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
+         List<WorkerApplication> workerApplications =  workerApplicationService.getWorks(page, results);
+         workerApplications.stream().map(workerApplication -> {
+             workerApplication.setPhoneNumbers(null);
+             User user = new User();
+             user.setEmail(workerApplication.getUser().getEmail());
+             user.setPhoto(workerApplication.getUser().getPhoto());
+             workerApplication.setUser(user);
+             return workerApplication;
+         });
+         return workerApplications;
+     }
+
      @RequestMapping(value = "/addtosaved")
-     public void saveWork(Authentication authentication, @RequestParam(name ="id") Long workerApplicationID){
+     public void saveWorkerApplication(Authentication authentication, @RequestParam(name ="id") Long workerApplicationID){
          userSaveWorkerApplicationService.addToSavedWorkerApplication(((User) authentication.getPrincipal()).getId(), workerApplicationID);
      }
 

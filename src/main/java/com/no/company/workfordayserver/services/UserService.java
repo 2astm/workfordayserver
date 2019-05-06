@@ -1,14 +1,8 @@
 package com.no.company.workfordayserver.services;
 
 import com.no.company.workfordayserver.entities.User;
-import com.no.company.workfordayserver.entities.UserSaveWork;
-import com.no.company.workfordayserver.entities.Work;
-import com.no.company.workfordayserver.repos.UserRepository;
-import com.no.company.workfordayserver.repos.UserSaveWorkRepository;
+import com.no.company.workfordayserver.repos.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Email;
-import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 
