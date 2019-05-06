@@ -1,5 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -19,6 +21,7 @@ public class Hashtag {
     private String name;
 
     @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashTags")
+    @JsonBackReference("workerApplication_hashtags")
     private List<WorkerApplication> workerApplications;
 
     @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashTags")

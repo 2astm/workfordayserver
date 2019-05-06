@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "user")   
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Work> works;
 

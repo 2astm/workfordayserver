@@ -1,5 +1,8 @@
 package com.no.company.workfordayserver.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
@@ -19,6 +22,7 @@ public class WorkerApplication {
     private String phoneNumbers;
 
     @ManyToMany(targetEntity = Hashtag.class)
+    @JsonManagedReference("workerApplication_hashtags")
     private List<Hashtag> hashTags;
 
     @Column(name = "date_create")
