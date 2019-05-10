@@ -14,8 +14,10 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void setUser(@RequestBody User newUser) throws DataFormatException {
-        userService.saveUser(newUser);
+    public User setUser(@RequestBody User newUser) throws DataFormatException {
+        User user=  userService.saveUser(newUser);
+        user.setPassword(null);
+       return user;
     }
 
     @RequestMapping(value = "/get")

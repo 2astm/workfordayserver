@@ -26,9 +26,9 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
     }
 
-    public void saveUser(User user) throws DataFormatException {
+    public User saveUser(User user) throws DataFormatException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public void editUser(User user, Long userID) throws UsernameNotFoundException {
