@@ -15,7 +15,7 @@ public class WorkerApplication {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
     @Pattern(regexp = "([+]38[0-9]{10};)+")
