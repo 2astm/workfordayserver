@@ -20,9 +20,9 @@ public class Hashtag {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashTags")
-    @JsonManagedReference("workerApplication_hashtags")
-    private List<WorkerApplication> workerApplications;
+//    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashTags")
+//    @JsonBackReference("workerApplication_hashtags")
+//    private List<WorkerApplication> workerApplications;
 
     @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashTags")
     private List<Work> works;
@@ -42,14 +42,14 @@ public class Hashtag {
     public void setName(String name) {
         this.name = name;
     }
-
-    public List<WorkerApplication> getWorkerApplications() {
-        return workerApplications;
-    }
-
-    public void setWorkerApplications(List<WorkerApplication> workerApplications) {
-        this.workerApplications = workerApplications;
-    }
+//
+//    public List<WorkerApplication> getWorkerApplications() {
+//        return workerApplications;
+//    }
+//
+//    public void setWorkerApplications(List<WorkerApplication> workerApplications) {
+//        this.workerApplications = workerApplications;
+//    }
 
     public List<Work> getWorks() {
         return works;
