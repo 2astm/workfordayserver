@@ -24,7 +24,7 @@ public class WorkerApplication {
     private String description;
 
     @ManyToMany(targetEntity = Hashtag.class)
-    @JsonManagedReference("workerApplication_hashtags")
+    @JsonBackReference("workerApplication_hashtags")
     private List<Hashtag> hashTags;
 
     @Column(name = "date_create")

@@ -21,7 +21,7 @@ public class Hashtag {
     private String name;
 
     @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.WorkerApplication.class, mappedBy = "hashTags")
-    @JsonBackReference("workerApplication_hashtags")
+    @JsonManagedReference("workerApplication_hashtags")
     private List<WorkerApplication> workerApplications;
 
     @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashTags")
