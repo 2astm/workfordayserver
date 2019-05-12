@@ -56,16 +56,8 @@ public class WorkerApplicationController {
      }
 
      @RequestMapping(value = "/getapplications")
-     public List<WorkerApplication> getApplications(@RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
+     public List<WorkerApplication> getApplications(Authentication authentication, @RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
          List<WorkerApplication> workerApplications =  workerApplicationService.getWorks(page, results);
-         workerApplications.stream().map(workerApplication -> {
-             workerApplication.setPhoneNumbers(null);
-             User user = new User();
-             user.setEmail(workerApplication.getUser().getEmail());
-             user.setPhoto(workerApplication.getUser().getPhoto());
-             workerApplication.setUser(user);
-             return workerApplication;
-         });
          return workerApplications;
      }
 
