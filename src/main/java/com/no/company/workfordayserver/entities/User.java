@@ -25,6 +25,9 @@ public class User implements UserDetails {
     @GeneratedValue
     private Long id;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private boolean accountNonLocked;
+
     @Email
     @NotNull
     @Column(unique = true)
@@ -108,9 +111,8 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonIgnore
     public boolean isAccountNonLocked() {
-        return true;
+        return accountNonLocked;
     }
 
     @Override
@@ -162,6 +164,7 @@ public class User implements UserDetails {
         dateCreate = new Date();
         dateUpdate = dateCreate;
         isUser = true;
+        accountNonLocked = true;
     }
 
     public Date getDateUpdate() {
@@ -196,6 +199,10 @@ public class User implements UserDetails {
 
     public void setUserSavedWorks(List<UserSaveWork> userSavedWorks) {
         this.userSavedWorks = userSavedWorks;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
     }
 
     public List<UserSaveWorkerApplication> getSavedWorkerApplication() {
