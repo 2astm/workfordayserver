@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface HashtagRepository extends JpaRepository<Hashtag, Long> {
 
-    Optional<Hashtag> findByName(Long aLong);
+    Optional<Hashtag> findByName(String string);
 }

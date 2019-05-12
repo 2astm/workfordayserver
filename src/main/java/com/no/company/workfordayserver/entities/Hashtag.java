@@ -1,13 +1,8 @@
 package com.no.company.workfordayserver.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-
 @Entity
 //@Document(indexName = "items", type = "items", shards = 1)
 public class Hashtag {

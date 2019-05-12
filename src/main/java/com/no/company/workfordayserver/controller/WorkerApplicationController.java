@@ -24,6 +24,7 @@ public class WorkerApplicationController {
 
      @RequestMapping(value = "/add", method = RequestMethod.POST)
      public void addWork(Authentication authentication, @RequestBody WorkerApplication workerApplication){
+         System.out.println((User) authentication.getPrincipal());
          workerApplicationService.saveWorkerApplication(workerApplication, (User) authentication.getPrincipal());
      }
 

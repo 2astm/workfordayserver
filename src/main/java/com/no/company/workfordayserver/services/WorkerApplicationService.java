@@ -1,16 +1,20 @@
 package com.no.company.workfordayserver.services;
 
+import com.no.company.workfordayserver.entities.Hashtag;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.WorkerApplication;
 import com.no.company.workfordayserver.jsonmodels.FiltersForWork;
+import com.no.company.workfordayserver.repos.HashtagRepository;
 import com.no.company.workfordayserver.repos.WorkerApplicationRepostiory;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +22,17 @@ import java.util.Optional;
 public class WorkerApplicationService {
 
     private WorkerApplicationRepostiory workerApplicationRepostiory;
+    private HashtagRepository hashtagRepository;
 
     public void saveWorkerApplication(WorkerApplication workerApplication, User user){
         //TODO need to save hashtags before if need
         workerApplication.setUser(user);
+        for (Hashtag hashtag : workerApplication.getHashtags()) {
+            Optional<Hashtag> optionalHashtag = hashtagRepository.findByName(hashtag.getName());
+            optionalHashtag.ifPresentOrElse(
+                    presentHashtag-> hashtag.setId(presentHashtag.getId()),
+                    () -> hashtagRepository.save(hashtag));
+        }
         workerApplicationRepostiory.save(workerApplication);
     }
 
@@ -58,5 +69,10 @@ public class WorkerApplicationService {
     @Autowired
     public void setWorkerApplicationRepostiory(WorkerApplicationRepostiory workerApplicationRepostiory) {
         this.workerApplicationRepostiory = workerApplicationRepostiory;
+    }
+
+    @Autowired
+    public void setHashtagRepository(HashtagRepository hashtagRepository) {
+        this.hashtagRepository = hashtagRepository;
     }
 }
