@@ -33,16 +33,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/user/get/","/user/delete/").hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
-                .antMatchers(HttpMethod.POST, "/user/edit/", "/work/addwork", "/work/changework", "/workerapplication/add/").hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
-                .antMatchers(HttpMethod.GET, "/user/addAdmin/").hasRole(SecurityRoles.ADMIN)
-                .antMatchers(HttpMethod.GET, "/workerapplication/getapplications").permitAll()
+                .antMatchers(HttpMethod.GET, "/user/get","/user/delete")
+                    .hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
+                .antMatchers(HttpMethod.POST, "/user/edit", "/work/addwork", "/work/changework", "/workerapplication/add")
+                    .hasAnyRole(SecurityRoles.USER, SecurityRoles.ADMIN)
+                .antMatchers(HttpMethod.GET, "/user/addAdmin")
+                    .hasRole(SecurityRoles.ADMIN)
+                .antMatchers(HttpMethod.GET, "/workerapplication/getapplications")
+                    .permitAll()
                 .and()
                 .csrf().disable()
                 .formLogin().disable()
-                .rememberMe()
-                .and().logout().permitAll().logoutUrl("/logout");
+                .logout().logoutUrl("/logout");
     }
+
 
     @Autowired
     public void setUserService(UserService userService) {

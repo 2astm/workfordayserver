@@ -23,13 +23,12 @@ public class WorkerApplicationController {
     private UserSaveWorkerApplicationService userSaveWorkerApplicationService;
 
      @RequestMapping(value = "/add", method = RequestMethod.POST)
-     public void addWork(Authentication authentication, @RequestBody WorkerApplication workerApplication){
-         System.out.println((User) authentication.getPrincipal());
+     public void addWorkerApplication(Authentication authentication, @RequestBody WorkerApplication workerApplication){
          workerApplicationService.saveWorkerApplication(workerApplication, (User) authentication.getPrincipal());
      }
 
      @RequestMapping(value = "/change", method = RequestMethod.POST)
-     public void changeWork(Authentication authentication, @RequestBody WorkerApplication workerApplication) throws NotFoundException {
+     public void changeWorkerApplication(Authentication authentication, @RequestBody WorkerApplication workerApplication) throws NotFoundException {
          if (workerApplication.getId() == null) throw new NullPointerException("ID not selected");
          workerApplicationService.editWorkerApplication(workerApplication, (User) authentication.getPrincipal());
      }
