@@ -3,6 +3,7 @@ package com.no.company.workfordayserver.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.no.company.workfordayserver.consts.SecurityRoles;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +31,7 @@ public class User implements UserDetails {
     private String email;
 
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @NotNull
@@ -89,7 +91,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -151,7 +152,6 @@ public class User implements UserDetails {
         this.photo = photo;
     }
 
-    @JsonIgnore
     public Date getDateCreate() {
         return dateCreate;
     }
@@ -163,7 +163,6 @@ public class User implements UserDetails {
         isUser = true;
     }
 
-    @JsonIgnore
     public Date getDateUpdate() {
         return dateUpdate;
     }
@@ -190,7 +189,6 @@ public class User implements UserDetails {
         this.isUser = user;
     }
 
-    @JsonIgnore
     public List<UserSaveWork> getUserSavedWorks() {
         return userSavedWorks;
     }
@@ -199,7 +197,6 @@ public class User implements UserDetails {
         this.userSavedWorks = userSavedWorks;
     }
 
-    @JsonIgnore
     public List<UserSaveWorkerApplication> getSavedWorkerApplication() {
         return savedWorkerApplication;
     }
