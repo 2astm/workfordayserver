@@ -2,6 +2,7 @@ package com.no.company.workfordayserver.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -16,15 +17,17 @@ public class WorkerApplication {
     private Long id;
 
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private User user;
 
     @Pattern(regexp = "([+]38[0-9]{10};)+")
+    @JsonProperty("phonenumber")
     private String phoneNumbers;
 
     private String description;
 
     @ManyToMany(targetEntity = Hashtag.class)
-    private List<Hashtag> hashTags;
+    private List<Hashtag> hashtags;
 
     @Column(name = "date_create")
     private Date dateCreate;
@@ -67,12 +70,12 @@ public class WorkerApplication {
         this.dateUpdate = new Date();
     }
 
-    public List<Hashtag> getHashTags() {
-        return hashTags;
+    public List<Hashtag> getHashtags() {
+        return hashtags;
     }
 
-    public void setHashTags(List<Hashtag> hashTags) {
-        this.hashTags = hashTags;
+    public void setHashtags(List<Hashtag> hashTags) {
+        this.hashtags = hashTags;
     }
 
     public String getPhoneNumbers() {
@@ -92,8 +95,8 @@ public class WorkerApplication {
     }
 
     public void setWorkerApplication(WorkerApplication workerApplication){
-        if (workerApplication.hashTags != null)
-            this.hashTags = workerApplication.hashTags;
+        if (workerApplication.hashtags != null)
+            this.hashtags = workerApplication.hashtags;
         if (workerApplication.phoneNumbers != null)
             this.phoneNumbers = workerApplication.phoneNumbers;
     }

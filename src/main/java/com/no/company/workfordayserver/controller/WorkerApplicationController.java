@@ -24,7 +24,7 @@ public class WorkerApplicationController {
 
      @RequestMapping(value = "/add", method = RequestMethod.POST)
      public void addWork(Authentication authentication, @RequestBody WorkerApplication workerApplication){
-         workerApplicationService.saveWorkerApplication(workerApplication, workerApplication.getUser());//(User) authentication.getPrincipal());
+         workerApplicationService.saveWorkerApplication(workerApplication, (User) authentication.getPrincipal());
      }
 
      @RequestMapping(value = "/change", method = RequestMethod.POST)

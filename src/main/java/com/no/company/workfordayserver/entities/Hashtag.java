@@ -24,8 +24,8 @@ public class Hashtag {
 //    @JsonBackReference("workerApplication_hashtags")
 //    private List<WorkerApplication> workerApplications;
 
-    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashTags")
-    private List<Work> works;
+//    @ManyToMany(targetEntity = com.no.company.workfordayserver.entities.Work.class, mappedBy = "hashtags")
+//    private List<Work> works;
 
     public Long getId() {
         return id;
@@ -50,12 +50,12 @@ public class Hashtag {
 //    public void setWorkerApplications(List<WorkerApplication> workerApplications) {
 //        this.workerApplications = workerApplications;
 //    }
-
-    public List<Work> getWorks() {
-        return works;
-    }
-
-    public void setWorks(List<Work> works) {
-        this.works = works;
-    }
+//
+//    public List<Work> getWorks() {
+//        return works;
+//    }
+//
+//    public void setWorks(List<Work> works) {
+//        this.works = works;
+//    }
 }
