@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/workerapplication")
@@ -58,7 +59,10 @@ public class WorkerApplicationController {
      @RequestMapping(value = "/getapplications")
      public List<WorkerApplication> getApplications(Authentication authentication, @RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
          List<WorkerApplication> workerApplications =  workerApplicationService.getWorks(page, results);
-         return workerApplications;
+         return workerApplications.stream().map(workerApplication -> {
+            workerApplication.setPhoneNumbers(null);
+            return workerApplication;
+         }).collect(Collectors.toList());
      }
 
      @RequestMapping(value = "/addtosaved")
@@ -70,26 +74,7 @@ public class WorkerApplicationController {
      public List<UserSaveWorkerApplication> getSavedWorks(Authentication authentication, @RequestParam(name = "page") int page, @RequestParam(name="results") int results){
          return userSaveWorkerApplicationService.getSavedWorkerApplications(((User) authentication.getPrincipal()).getId(), page, results);
      }
-    /*
-    Todo addWork
-     */
 
-    /*
-    Todo editwork
-     */
-
-    /*
-    Todo get list of workerApplication (need pages), also filters
-     */
-
-    /*
-    Todo get workerApplications by id without phone number
-     */
-
-    /*
-    Todo Secutirty need
-    Todo get workerApplication by id
-     */
 
     @Autowired
     public void setWorkerApplicationService(WorkerApplicationService workerApplicationService) {
