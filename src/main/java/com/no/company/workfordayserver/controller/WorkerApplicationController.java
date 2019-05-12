@@ -59,10 +59,9 @@ public class WorkerApplicationController {
      @RequestMapping(value = "/getapplications")
      public List<WorkerApplication> getApplications(Authentication authentication, @RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
          List<WorkerApplication> workerApplications =  workerApplicationService.getWorks(page, results);
-         return workerApplications.stream().map(workerApplication -> {
-            workerApplication.setPhoneNumbers(null);
-            return workerApplication;
-         }).collect(Collectors.toList());
+         workerApplications
+                 .forEach(workerApplication -> workerApplication.getUser().setPhoneNumbers(null));
+         return workerApplications;
      }
 
      @RequestMapping(value = "/addtosaved")
