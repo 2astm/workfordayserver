@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,7 @@ public class WorkerApplicationController {
 
      @RequestMapping(value = "/get")
      public WorkerApplication getWork(Authentication authentication, @RequestParam(name = "id") Long id) throws NotFoundException {
+         System.out.println("HERE");
          if(authentication.isAuthenticated()){
              return workerApplicationService.getWorkerApplication(id);
          }else{
@@ -59,7 +61,7 @@ public class WorkerApplicationController {
      @RequestMapping(value = "/getapplications")
      public List<WorkerApplication> getApplications(Authentication authentication, @RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
          List<WorkerApplication> workerApplications =  workerApplicationService.getWorks(page, results);
-         if (!authentication.isAuthenticated())
+         if (authentication == null)
              workerApplications.forEach(workerApplication -> workerApplication.setPhoneNumbers(null));
          workerApplications
                  .forEach(workerApplication -> workerApplication.getUser().setPhoneNumbers(null));
