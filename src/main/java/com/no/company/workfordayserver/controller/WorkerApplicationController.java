@@ -59,6 +59,8 @@ public class WorkerApplicationController {
      @RequestMapping(value = "/getapplications")
      public List<WorkerApplication> getApplications(Authentication authentication, @RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
          List<WorkerApplication> workerApplications =  workerApplicationService.getWorks(page, results);
+         if (!authentication.isAuthenticated())
+             workerApplications.forEach(workerApplication -> workerApplication.setPhoneNumbers(null));
          workerApplications
                  .forEach(workerApplication -> workerApplication.getUser().setPhoneNumbers(null));
          return workerApplications;
