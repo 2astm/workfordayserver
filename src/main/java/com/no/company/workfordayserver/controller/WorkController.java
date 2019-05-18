@@ -43,6 +43,15 @@ public class WorkController {
             return work;
         }
     }
+    @RequestMapping(value = "/getworks")
+    public List<Work> getApplications(Authentication authentication, @RequestParam(name = "page") Integer page, @RequestParam(name = "results") Integer results){
+        List<Work> works =  workService.getWorks(page, results);
+        if (authentication == null)
+            works.forEach(workerApplication -> workerApplication.setPhoneNumbers(null));
+        works
+                .forEach(workerApplication -> workerApplication.getUser().setPhoneNumbers(null));
+        return works;
+    }
 
     @RequestMapping(value = "/remove")
     public void removeWork(Authentication authentication, @RequestParam(name = "id") Long id){
@@ -53,7 +62,7 @@ public class WorkController {
     public List<Work> getWorks(Authentication authentication, @RequestBody FiltersForWork filtersForWork){
         List<Work> works = workService.getWorks(filtersForWork);
         if (!authentication.isAuthenticated())
-            works.stream().forEach(work -> work.setPhoneNumbers(null));
+            works.forEach(work -> work.setPhoneNumbers(null));
         return works;
     }
 

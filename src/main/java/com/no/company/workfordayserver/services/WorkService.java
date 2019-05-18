@@ -8,6 +8,8 @@ import com.no.company.workfordayserver.repos.HashtagRepository;
 import com.no.company.workfordayserver.repos.WorkRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +55,10 @@ public class WorkService {
     public List<Work> getWorks(FiltersForWork filtersForWork){
        //TODO FILTER
         return null;
+    }
+
+    public List<Work> getWorks(Integer page, Integer resutls){
+        return workRepository.findAll(PageRequest.of(page, resutls, Sort.by("dateUpdate"))).getContent();
     }
 
     @Autowired
