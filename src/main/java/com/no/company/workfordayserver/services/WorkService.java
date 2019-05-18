@@ -1,5 +1,6 @@
 package com.no.company.workfordayserver.services;
 
+import com.no.company.workfordayserver.entities.Hashtag;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.Work;
 import com.no.company.workfordayserver.jsonmodels.FiltersForWork;
@@ -16,11 +17,12 @@ import java.util.Optional;
 @Service
 public class WorkService {
     private WorkRepository workRepository;
-    private HashtagRepository hashtagRepository;
+    private HashtagService hashtagService;
 
     public void saveWork(Work work, User user){
         //TODO need to save hasthags before if need
         work.setUser(user);
+        hashtagService.saveAllHashtags(work.getHashTags());
         workRepository.save(work);
     }
 
@@ -59,7 +61,7 @@ public class WorkService {
     }
 
     @Autowired
-    public void setHashtagRepository(HashtagRepository hashtagRepository) {
-        this.hashtagRepository = hashtagRepository;
+    public void setHashtagService(HashtagService hashtagService) {
+        this.hashtagService = hashtagService;
     }
 }

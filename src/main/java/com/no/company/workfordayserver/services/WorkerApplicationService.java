@@ -22,17 +22,12 @@ import java.util.Optional;
 public class WorkerApplicationService {
 
     private WorkerApplicationRepostiory workerApplicationRepostiory;
-    private HashtagRepository hashtagRepository;
+    private HashtagService hashtagService;
 
     public void saveWorkerApplication(WorkerApplication workerApplication, User user){
         //TODO need to save hashtags before if need
         workerApplication.setUser(user);
-        for (Hashtag hashtag : workerApplication.getHashtags()) {
-            Optional<Hashtag> optionalHashtag = hashtagRepository.findByName(hashtag.getName());
-            optionalHashtag.ifPresentOrElse(
-                    presentHashtag-> hashtag.setId(presentHashtag.getId()),
-                    () -> hashtagRepository.save(hashtag));
-        }
+        hashtagService.saveAllHashtags(workerApplication.getHashtags());
         workerApplicationRepostiory.save(workerApplication);
     }
 
@@ -72,7 +67,7 @@ public class WorkerApplicationService {
     }
 
     @Autowired
-    public void setHashtagRepository(HashtagRepository hashtagRepository) {
-        this.hashtagRepository = hashtagRepository;
+    public void setHashtagService(HashtagService hashtagService) {
+        this.hashtagService = hashtagService;
     }
 }
