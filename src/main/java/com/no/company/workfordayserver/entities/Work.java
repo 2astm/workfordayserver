@@ -1,6 +1,7 @@
 package com.no.company.workfordayserver.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,7 @@ public class Work {
     private Status status;
 
     @Pattern(regexp = "([+]38[0-9]{10};)+")
+    @JsonProperty("phonenumber")
     private String phoneNumbers;
 
     private Date dateCreate;
