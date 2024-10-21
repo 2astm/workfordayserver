@@ -19,7 +19,7 @@ public class WorkerApplication {
     private String phoneNumbers;
 
     @ManyToMany(targetEntity = Hashtag.class)
-    private List<Hashtag> hashtags;
+    private List<Hashtag> hashTags;
 
     @Column(name = "date_create")
     private Date dateCreate;
@@ -62,12 +62,12 @@ public class WorkerApplication {
         this.dateUpdate = new Date();
     }
 
-    public List<Hashtag> getHashtags() {
-        return hashtags;
+    public List<Hashtag> getHashTags() {
+        return hashTags;
     }
 
-    public void setHashtags(List<Hashtag> hashtags) {
-        this.hashtags = hashtags;
+    public void setHashTags(List<Hashtag> hashTags) {
+        this.hashTags = hashTags;
     }
 
     public String getPhoneNumbers() {
@@ -79,8 +79,8 @@ public class WorkerApplication {
     }
 
     public void setWorkerApplication(WorkerApplication workerApplication){
-        if (workerApplication.hashtags != null)
-            this.hashtags = workerApplication.hashtags;
+        if (workerApplication.hashTags != null)
+            this.hashTags = workerApplication.hashTags;
         if (workerApplication.phoneNumbers != null)
             this.phoneNumbers = workerApplication.phoneNumbers;
     }

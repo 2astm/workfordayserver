@@ -23,14 +23,14 @@ public class WorkController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addWork(Authentication authentication, @RequestBody Work work){
         workService.saveWork(work, (User) authentication.getPrincipal());
-//        System.out.println(work.getHashtags().get(0).getName());
+//        System.out.println(work.getHashTags().get(0).getName());
     }
 
     @RequestMapping(value = "/change", method = RequestMethod.POST)
     public void changeWork(Authentication authentication, @RequestBody Work work) throws NotFoundException {
         if (work.getId() == null) throw new NullPointerException("ID not selected");
         workService.editWork(work, (User) authentication.getPrincipal());
-        System.out.println(work.getHashtags());
+        System.out.println(work.getHashTags());
     }
 
     @RequestMapping(value = "/get")

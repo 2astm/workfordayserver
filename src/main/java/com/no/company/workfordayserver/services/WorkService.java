@@ -3,6 +3,7 @@ package com.no.company.workfordayserver.services;
 import com.no.company.workfordayserver.entities.User;
 import com.no.company.workfordayserver.entities.Work;
 import com.no.company.workfordayserver.jsonmodels.FiltersForWork;
+import com.no.company.workfordayserver.repos.HashtagRepository;
 import com.no.company.workfordayserver.repos.UserSaveWorkRepository;
 import com.no.company.workfordayserver.repos.WorkRepository;
 import javassist.NotFoundException;
@@ -16,11 +17,10 @@ import java.util.Optional;
 @Service
 public class WorkService {
     private WorkRepository workRepository;
-    private UserSaveWorkRepository userSaveWorkRepository;
+    private HashtagRepository hashtagRepository;
 
     public void saveWork(Work work, User user){
-
-        //TODO need to save hashtags before if need
+        //TODO need to save hasthags before if need
         work.setUser(user);
         workRepository.save(work);
     }
@@ -42,7 +42,11 @@ public class WorkService {
     }
 
     public void deleteWork(Long workID, User user){
-        workRepository.deleteByIdAndUser(workID, user);
+        Work work = workRepository.getOne(workID);
+        if (work.getUser().getId().equals(user.getId())){
+            work.setStatus(Work.Status.DELETED);
+            workRepository.save(work);
+        }
     }
 
     public List<Work> getWorks(FiltersForWork filtersForWork){
@@ -56,7 +60,7 @@ public class WorkService {
     }
 
     @Autowired
-    public void setUserSaveWorkRepository(UserSaveWorkRepository userSaveWorkRepository) {
-        this.userSaveWorkRepository = userSaveWorkRepository;
+    public void setHashtagRepository(HashtagRepository hashtagRepository) {
+        this.hashtagRepository = hashtagRepository;
     }
 }
